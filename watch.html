@@ -43,8 +43,8 @@ input[type='text']{
     font: 200 17px '';
     width: 100%;
 }
-.tab{display: flex;height: 30px;gap: 50px;width: 99%;}
-.in{flex: 9;
+.tab{display: flex;height: 40px;gap: 20px;width: 99%;}
+.in{flex: 8;
 outline: none;
 transition: 0.21s;
 border: 1px solid black;
@@ -54,16 +54,19 @@ border: 1px solid black;
         .up{
             flex:2;
         }
-        .down{flex: 8;}
+        .down{flex: 8;display: flex;gap: 5px;}
+
         .player{
             width: 95%;
             height: 95%;
-            /* border: 1px solid red; */
+            flex: 20;
+            border: 1px solid red;
         }
         #search{
             border: none;
             background-image: linear-gradient(skyblue,#28a1d1,#4696e6);
             }
+        .qp{flex: 1;flex-shrink: 0;width: 20%;height: 5%;margin-top: 18%;}
         
     </style>
 </head>
@@ -79,10 +82,20 @@ border: 1px solid black;
     <div class="down">
         <!-- <div class="player"></div> -->
     <iframe src=""class="player" frameborder="0"></iframe>
+    <button class="qp" onclick="gotoit();">全屏</button>
 
 <script>
     function t(){
-        document.querySelector('.player').src = 'https://jx.jsonplayer.com/player/?url='+document.querySelector('.in').value;
+        var inputs = document.querySelector('.in').value;
+        if (inputs.indexOf('http') == -1){
+            return alert('地址输入错误,请重新核对!')
+        }
+        document.querySelector('.player').src = 'https://jx.jsonplayer.com/player/?url='+inputs;
+       
+    }
+
+    function gotoit(){
+        location.href = document.querySelector('.player').src;
     }
 </script>
 
