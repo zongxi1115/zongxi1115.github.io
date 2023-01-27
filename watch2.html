@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0;margin: 0;
+        }
+        body{
+            /* background: url(https://oss.zsyts.cn/user_files/29/screenshot/70223187_1617201950.jpg) no-repeat ;
+            background-size: cover; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            
+        }
+        .center{
+            border: 1px solid blue;
+            width: 800px;height: 380px;
+            border-radius: 50px;
+            backdrop-filter: blur(6px);
+        }
+        .inner{transform: translateX(50px);width: calc(100% - 50px);}
+        .ask{font: 100 28px '';padding-top: 10px;}
+        #in{
+            font: 100 16px '';
+            outline: none;
+            width: calc(100% - 10px);
+            margin-top: 15px;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            transition: all 0.2s;
+            background-color: transparent;
+        }
+        #in:focus{
+            border: 2px solid gold;
+        }
+
+        .search{
+            padding: 10px 10px;
+            border-radius: 9999px;
+            border: none;
+            margin: 30px 40%;
+            cursor: pointer;
+            background-image: linear-gradient(to right,rgba(182, 84, 164, 0.333),rgb(100,100,100));
+            
+        }
+        .certain{
+            margin: 0px 25%;
+        }
+
+
+        #test{
+            position: fixed;
+            z-index: -999;
+
+        }
+    </style>
+    
+</head>
+<body>
+    <video id="test"src="bkg2.mp4" autoplay loop></video>
+    <div class="center">
+       <div class="inner">
+        <div class="ask">
+            客官,想看点啥?直接在下面粘贴地址就好了哦👇👇👇
+        </div>
+        <input type="text" id="in" placeholder="现在支持爱优腾/小破站/其他主流平台哦~">
+        <button class="search">开始看片啦~</button>
+        <div class="notice">
+            注意事项和食用方法:
+            <ol>
+                <li>请把观看视频页面的地址全部粘贴过来,而不是搜索界面.</li>
+                <li><strong>观看完毕或者因为中途不想看了要再次使用,请刷新本页面继续使用.</strong></li>
+                <li>播放器有记忆功能,能够跳转到你上次所看到的位置.</li>
+                <li>观看期间可能会有卡顿,请尝试拉进度条或者稍微等待一会儿.</li>
+                <li>当出现解析失败时,请刷新本页面,说明播放器暂时无法解析本视频.</li>
+            </ol>
+        </div>
+
+        <div class="certain">
+            <input type="checkbox" id="certain" style="vertical-align: center;">
+            <span id="a"style="font-size: 10px;color:green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我已经认真读过啦,现在开始使用捏</span>
+        </div>
+
+       </div>
+
+
+
+    </div>
+    <!-- <iframe id="videos"src="https://jx.jsonplayer.com/player/?url=${content}" frameborder="0"></iframe> -->
+
+
+    <script>
+        document.addEventListener('click',()=>{
+            $('#test').play();
+        })
+
+        function $(element){
+            return document.querySelector(element);
+        }
+        // document.querySelector().
+        $(".search").onclick = function(){
+            if(!$('#certain').checked) return ($('.notice').style.color = 'red');
+            var content = $('#in').value;
+            if(content.indexOf('http') == -1) return alert('输入网址格式有误!请重新核对!')
+            $('#in').value = content.split("?")[0]
+            document.writeln('<style>')
+            document.writeln("        #videos{");
+            document.writeln("            position: fixed;");
+            document.writeln("            left: 0;top: 0;");
+            document.writeln("            width: 100%;");
+            document.writeln("            height: 100%;");
+            document.writeln("        }");
+            document.writeln('</style>')
+            document.writeln(`       <iframe allowfullscreen id="videos"src="https://jx.jsonplayer.com/player/?url=${content}" frameborder="0"></iframe>
+`)
+            
+        }
+
+        $('#certain').checked = true;
+        $('#certain').addEventListener("click",function(){
+            if(this.checked){
+                $('#a').style.color = 'green';
+            }else{
+                $('#a').style.color = 'red';
+            }
+        })
+    </script>
+    
+</body>
+</html>
