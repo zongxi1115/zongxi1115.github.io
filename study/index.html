@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./src/ui/ui.css">
+    <script src="./src/ice.js"> </script>
+    <script src="./src/ui/ui.js"></script>
+</head>
+
+<body>
+
+
+    
+
+    <div class="tips flex">
+        <div class="content">
+            **欢迎来到<b>学习小屋</b>**<br>
+            网页施工中....日后更新UI,现临时托管链接.
+            <br>Produced By:Zong xi
+            
+        </div>
+        <div class="close">
+            <!-- × -->
+            <i class="icon ice-close-line" ></i>
+        </div>
+    </div>
+
+    <h1><svg t="1680104319493" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1179" width="200" height="200"><path d="M118.153846 118.153846h315.076923v315.076923H118.153846z" fill="#BFBFBF" p-id="1180"></path><path d="M433.230769 464.738462H118.153846c-17.329231 0-31.507692-14.178462-31.507692-31.507693V118.153846c0-17.329231 14.178462-31.507692 31.507692-31.507692h315.076923c17.329231 0 31.507692 14.178462 31.507693 31.507692v315.076923c0 17.329231-14.178462 31.507692-31.507693 31.507693z m-283.569231-63.015385h252.061539V149.661538H149.661538v252.061539zM905.846154 464.738462H590.769231c-17.329231 0-31.507692-14.178462-31.507693-31.507693V118.153846c0-17.329231 14.178462-31.507692 31.507693-31.507692h315.076923c17.329231 0 31.507692 14.178462 31.507692 31.507692v315.076923c0 17.329231-14.178462 31.507692-31.507692 31.507693z m-283.569231-63.015385h252.061539V149.661538H622.276923v252.061539z" fill="#7F7F7F" p-id="1181"></path><path d="M512 937.353846c-234.732308 0-425.353846-190.621538-425.353846-425.353846V118.153846c0-17.329231 14.178462-31.507692 31.507692-31.507692h315.076923c17.329231 0 31.507692 14.178462 31.507693 31.507692v399.36c0 22.843077 18.904615 41.747692 41.747692 41.747692h11.815384c22.843077 0 41.747692-18.904615 41.747693-41.747692V118.153846c0-17.329231 14.178462-31.507692 31.507692-31.507692h315.076923c17.329231 0 31.507692 14.178462 31.507692 31.507692v393.846154c-0.787692 234.732308-191.409231 425.353846-426.141538 425.353846zM149.661538 149.661538v362.338462c0 200.073846 162.264615 362.338462 362.338462 362.338462s362.338462-162.264615 362.338462-362.338462V149.661538H622.276923v367.852308C622.276923 575.803077 575.803077 622.276923 517.513846 622.276923h-11.815384C448.196923 622.276923 401.723077 575.803077 401.723077 517.513846V149.661538H149.661538z" fill="#7F7F7F" p-id="1182"></path></svg>物理</h1>
+
+    <!-- 物理 -->
+    
+        <!-- <xy-tips dir="tl" tips="提取码:d6kz">
+            <li><a href="https://pan.baidu.com/share/init?surl=m0mS4A3vh6ylknHY2zsTrw"> [百度云网盘]高明静 2023高三高考物理 S班 暑秋寒春合集</a></li>
+        </xy-tips>
+        <li><a href=""></a></li> -->
+        <div class="con">
+
+        </div>
+        
+    <!-- <div class="rs"> [百度云网盘]高明静 2023高三高考物理 S班 暑秋寒春合集 </div> -->
+        
+
+    <!-- 英语 -->
+    <!--  todo:可加语法填空在线批阅的功能 -->
+
+
+
+    <!-- DOM操作代码 -->
+    <script>
+        var rescources = [{
+            title:"[百度云网盘]高明静 2023高三高考物理 S班 暑秋寒春合集",
+            url:"https://pan.baidu.com/share/init?surl=m0mS4A3vh6ylknHY2zsTrw",
+            pwd:"d6kz"
+        },{'title': '姜婷婷2020秋 高二物理秋季班 15讲带讲义完结', 'url': 'https://pan.baidu.com/share/init?surl=bdi5-8krXWw2sxI9wEj6fA', 'pwd': 'r9zz'}, {'title': '【2021秋】易物理.高二物理冲顶班（袁帅）', 'url': 'https://pan.baidu.com/share/init?surl=yr9EMkzCDJdq5yJby9Nygg', 'pwd': 'zwgd'}, 
+{'title': '2023高考物理 一轮复习联报暑假班夏梦迪', 'url': 'https://pan.baidu.com/share/init?surl=ITku4BP87FNRF5EWayO5Yw', 'pwd': 'ugfj'}, {'title': '高中物理 技巧笔记—秋季月考期中期末冲分秘籍 ', 'url': 'https://pan.baidu.com/share/init?surl=XTNI6z5XQYBPYd30jeKD8w', 'pwd': 'yon4'}]
+        // ice.alert("即将跳转到网盘页,密码已复制到剪切板,请等待...");
+        let close = document.querySelector('.close');
+        close.onclick = function () {
+            document.querySelector(".tips").style.display="none";
+        };
+        let content = document.querySelector('.con');
+        
+        let index = 0;
+        rescources.forEach(e=>{
+            content.insertAdjacentHTML('beforeend',"<div class='rs' data-index='"+index+"'>"+e.title+"</div>")
+            index++;
+        })
+
+        // 批量添加监听事件
+        document.querySelectorAll(".rs").forEach(function (item) {
+            
+            item.onclick = function(){
+                indexx = parseInt(item.getAttribute("data-index"));
+                current = rescources[indexx];
+                ice.alert("5s后跳转到网盘页,密码已复制到剪切板...");
+                navigator.clipboard.writeText(current.pwd);
+                setTimeout(() => {
+                    location.replace(current.url);
+                    console.log('success');
+                }, 5000);
+            }
+        })
+
+        // js动态添加网盘地址
+
+        
+        //点击连接后的逻辑处理
+
+    </script>
+</body>
+
+</html>

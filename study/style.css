@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+}
+.flex{display: flex;}
+svg{width: 32px;height: 32px;display: inline;}
+
+/* tips内容界面css */
+.content{
+    flex: 9;
+    background-color: rgba(117, 201, 69, 0.4);
+    padding: 10px 0 10px 15px;
+}
+.close{
+    position: relative;
+    right: 5%;
+    
+    
+cursor: pointer;}
+
+.tips{
+    height: 80px;
+    margin: 20px 10%;
+    border:none;
+    border-radius: 2px 5px 15px 2px;
+    overflow: hidden;
+}
+.tips::before{
+    display: block;
+    width: 3px;
+    height: 100%;
+    background-color: brown;
+    content: '';
+    border-radius: 1px solid;
+}
+
+/* h1大标题 样式 */
+h1{
+    text-align: center;
+}
+
+/* 设置悬浮框提示值  貌似没成功 */
+xy-tips{
+    padding: 0 10px!important;
+}
+
+/* rs即列表内容 */
+.rs{
+    padding-top: 5px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+.rs:hover{
+    color: cornflowerblue;
+    transition: 0.4s;
+}
