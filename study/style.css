@@ -11,6 +11,9 @@ html,body{
 .flex{display: flex;}
 svg{width: 32px;height: 32px;display: inline;}
 
+:root{
+    --tip-height: 120px
+}
 /* tips内容界面css */
 .content{
     flex: 9;
@@ -25,7 +28,7 @@ svg{width: 32px;height: 32px;display: inline;}
 cursor: pointer;}
 
 .tips{
-    height: 80px;
+    height: var(--tip-height);
     margin: 20px 10%;
     border:none;
     border-radius: 2px 5px 15px 2px;
@@ -39,6 +42,7 @@ cursor: pointer;}
     content: '';
     border-radius: 1px solid;
 }
+
 
 /* h1大标题 样式 */
 h1{
@@ -55,6 +59,7 @@ xy-tips{
     padding-top: 5px;
     margin-left: 15px;
     cursor: pointer;
+    text-decoration: solid;
 }
 .rs:hover{
     color: cornflowerblue;

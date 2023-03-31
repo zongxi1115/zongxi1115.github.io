@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="yufa.css">
+    <link rel="stylesheet" href="./src/ui/ui.css">
+    <script src="./src/ice.js"> </script>
+    <script src="./src/ui/ui.js"></script>
+</head>
+
+<body>
+
+    <div class="title">语法填空训练（第 <span class="num"></span> 篇）</div>
+    <div class="intro">
+        <p style="font-weight: 700;">第二节 (共10小题；每小题1.5分，满分15分)</p>阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。
+    </div>
+    <question>
+        <p>
+            New Year's Eve is the last day of the year. It is always an exciting time because
+            people look forward to <input type="text" class="complete">(welcome) a new year. It is also a good time to
+            think back and say goodbye to the old year. New Year's Eve is a ________(nation)
+            holiday for many people around the world. In a lot of countries , people go back
+            to their hometown for the New Year, so usually the trains and buses________(pack)
+            with people. In England, there is always a New Year's Eve party, ________ is usually
+            held at someone's home and the host invites friends, families and neighbors. The
+            living room becomes a mini disco as everyone dances________ loud music.
+            <br>I have lots of good ________(memory) of New Year's Eve . I once spent one
+            freezing New Year's Eve in Trafalgar Square in the center of London. It snowed
+            and was ________(bitter) cold . I also spent many wonderful New Year's Eves in
+            Japan. There, it is a tradition________(visit) a shrine(圣坛)and pray for good things. I
+            think wherever you are, New Year's Eve is always ________exciting day. Maybe the
+            last way to welcome the New Year ________(be)watching amazing fireworks
+            displays in the world's cities.
+        </p>
+    </question>
+
+    <div class="btn-group flex" style="flex: space-between;position: relative;">
+        <div class="btn btn-blue mark">
+            <i class="icon ice-writing "></i>
+            点击批阅
+        </div>
+        <div class="right-cnt">
+            -4.5分（满分15分）
+        </div>
+    </div>
+    
+    
+
+
+</body>
+<script>
+    var data = [{
+        questions: `New Year's Eve is the last day of the year. It is always an exciting time because 
+    people look forward to ________(welcome) a new year. It is also a good time to 
+    think back and say goodbye to the old year. New Year's Eve is a ________(nation) 
+    holiday for many people around the world. In a lot of countries , people go back 
+    to their hometown for the New Year, so usually the trains and buses________(pack) 
+    with people. In England, there is always a New Year's Eve party, ________ is usually 
+    held at someone's home and the host invites friends, families and neighbors. The 
+    living room becomes a mini disco as everyone dances________ loud music.
+    <br>I have lots of good ________(memory) of New Year's Eve . I once spent one 
+    freezing New Year's Eve in Trafalgar Square in the center of London. It snowed 
+    and was ________(bitter) cold . I also spent many wonderful New Year's Eves in 
+    Japan. There, it is a tradition________(visit) a shrine(圣坛)and pray for good things. I 
+    think wherever you are, New Year's Eve is always ________exciting day. Maybe the 
+    last way to welcome the New Year ________(be)watching amazing fireworks 
+    displays in the world's cities.`,
+        answers: ['welcoming', 'national', 'are packed', 'which', 'to', 'memories', 'bitterly', 'to visit', 'an', 'is']
+    }, {
+        questions: `In Africa, when the antelope wakes up every morning, the first thing 1.______comes into his mind is, “I must be able to run 2.___ (fast) than the fastest lion, 3.______I will be killed by a lion.” And at just the same time, the lion 4.____ (wake) out of his dream, and the first thing 5._______(flash) into his mind is: “I must be able to catch up with the slowest antelope, otherwise I will starve to 6.______ (dead).” So almost at the same moment 7.____ the antelope and the lion jump to their feet, and start 8._______ (run) toward the rising sun.
+
+Such is life — 9.____ you are an antelope or a lion, you ought to dash forward without 10.____ (hesitate) when the sun rises.`,
+        // 1. that___2. faster__ 3. or (else) / otherwise_ 4. wakes_ 5. flashing
+
+        // 6. death__ 7. both___8. running____ 9. whether_ 10. hesitation
+        answers: ['that', 'faster', 'or', 'wakes', 'flashing', 'death', 'both', 'running', 'whether', 'hesitation']
+    }, {
+        questions: `You may wonder why we have a holiday in summer (1) _________ winter, but not in spring (2)_________ autumn. There are some reasons (3)_______________ it. Like most people, your intelligence（智力）changes from season to season. You are properly a lot sharper in the spring (4)_______________ you are (5)___________ any other time of the year. Ellsworth Huntington, who’s well known to us all concluded from other men’s work and his own among people in different climates that climate and temperature have a clear effect_(6)___________ our intelligence. He found that cool weather is far better for creative thinking than warm weather. This_(7)____________ mean that all people are not_(8)_____________ quick at learning in the summer as they_(9)_________________ during the rest of the year. It tells us, (10)________________, that intelligence of large numbers of people seems to be lowest in the summer.`,
+        //  1. and____ 2. or____ 3. for_____ 4. than___5. at 
+        // 6. on_____7. does___ 8. so / as___ 9. are___10. however
+        answers: ['and', 'or', 'for', 'than', 'at', 'on', 'does', 'so', 'are', 'however']
+    }, {
+        questions: `(2022新高考Ⅰ卷)The Chinese government recently finalized a plan to set up a Giant Panda National Park (GPNP). __ (cover) an area about three times __ size of Yellowstone National Part, the GPNP will be one of the first national park in the country. The plan will extend protection to a significant number of areas that __ (be) previously unprotected, bringing many of the existing protected areas for giant pandas under one authority __ (increase) effectiveness and reduce inconsistencies in management.
+
+After a three-year pilot period, the GPNP will be officially set up next year. The GPNP __ (design) to reflect the guiding principle of "protecting the authenticity and integrity (完整性) of natural ecosystems, preserving biological diversity, protecting ecological buffer zones, __ leaving behind precious natural assets (资产) for future generations". The GPNP's main goal is to improve connectivity between separate __ (population)and homes of giant pandas, and __ (eventual) achieve a desired level of population in the wild.
+
+Giant pandas also serve __ an umbrella species (物种), bringing protection to a host of plants and animals in the southwestern and northwestern parts of China. The GPNP is intended to provide stronger protection for all the species __ live within the Giant Panda Range and significantly improve the health of the ecosystem in the area.`
+        ,
+        answers: ['Covering', 'the', 'were', 'to increase', 'is designed', 'and', 'popuplation', 'eventually', 'as', 'that']
+    },
+    ]
+
+
+    // 获取网页？后的参数
+    url = window.location.href;
+    if(url.indexOf('?') > -1){
+        after = url.substring(url.indexOf('?')+1,).split('=');
+        question_index = parseInt(after[1])
+    }else{
+        question_index = 0
+    }
+    // console.log(url);
+    document.querySelector(".num").innerHTML = question_index+1;
+
+
+
+
+
+
+
+    // question_index = 3;
+    questions = data[question_index].questions.replace(/_{2,}/g, '&nbsp;&nbsp;<span class="f"><input type="text" class="complete"></span>&nbsp;&nbsp;')
+    // console.log(questions);
+    document.querySelector("question").innerHTML = questions;
+
+
+
+    // 批阅函数
+    document.querySelector(".mark").onclick = () => { mark(); }
+    function mark() {
+        ice.alert({
+            content: "是否提交？<br>友情提示：区分空格和大小写，请检查后提交。",
+            yes: yes
+        });
+        function yes() {
+            
+            let rightCnt = 0;
+            all_inputs = document.querySelectorAll(".complete")
+            let index = 0;
+            all_inputs.forEach(answer => {
+                answer.style.background = answer.value === data[question_index].answers[index] ? 'url(./imgs/true2.png) no-repeat 90% 90%' : 'url(./imgs/false.png) no-repeat 90% 90%';
+                if(answer.value === data[question_index].answers[index]){
+                    rightCnt++;
+                }
+                index++;
+
+            });
+            let cnt = document.querySelector(".right-cnt");
+            cnt.innerText = '-'+(10-rightCnt)*1.5+'分（满分15分）';
+            cnt.style.display = 'block';
+        }
+    }
+    document.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        ice.prompt({
+            content: '已禁止右键菜单！',
+            btn: false,
+            time: 1000
+        });
+        // get client x and y
+        // let x = e.clientX;
+        // let y = e.clientY;
+    })
+
+</script>
+
+</html>

@@ -1,0 +1,71 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman';
+}
+@font-face {
+    font-family: completer;
+    src: url(./font/Travelast-2OJle.otf);
+}
+
+/* 题头 */
+.intro{
+    padding-top: 15px;
+    font-size: large;
+    margin-left: 15px;
+    
+}
+/* 题目 */
+question{
+    user-select: none;
+    line-height: 28px;
+    font-size: larger;
+    text-indent: 5px;
+}
+.title{
+    font-size: 30px;
+    text-align: center;
+}
+.complete{
+    padding: 0;
+    border: none;
+    border-bottom: 2px solid;
+    outline: none;
+    font-size: large;
+    font-family: completer;
+    letter-spacing: 1.2px;
+    width: 90px;
+    
+}
+.f{position: relative;}
+.complete:focus{
+    border-bottom: 2px solid cornflowerblue;
+    /* transition: 0.4s; */
+}
+.f::before{
+    position: absolute;
+    content: "";
+    top: 100%;
+    left: 0;
+    width: 0;
+    /* height: 100%; */
+    border-bottom: 2px solid #000;
+    padding-top: 5px;
+}
+
+.f:hover:before{
+    border-bottom: 2px solid cornflowerblue;
+    width: 100%;
+    transform: translateX(2px);
+    
+    transition: .4s;
+}
+.f:hover > .complete{border: none!important;}
+.right-cnt{
+    position: absolute;
+    right: 0;
+    font-size: 40px;
+    color: red;
+    display: none;
+}
