@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>小王的学习小屋</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./src/ui/ui.css">
     <script src="./src/ice.js"> </script>
@@ -41,6 +41,12 @@
         <div class="physics con">
 
         </div>
+    <!-- 数学 -->
+    <h1><svg t="1680708806768" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1033" width="32" height="32"><path d="M905.846154 937.353846H669.538462c-17.329231 0-31.507692-14.178462-31.507693-31.507692V118.153846c0-17.329231 14.178462-31.507692 31.507693-31.507692h236.307692c17.329231 0 31.507692 14.178462 31.507692 31.507692v787.692308c0 17.329231-14.178462 31.507692-31.507692 31.507692z m-204.8-63.015384h173.292308V149.661538H701.046154v724.676924z" fill="#7F7F7F" p-id="1034"></path><path d="M905.846154 220.553846h-118.153846c-13.390769 0-23.630769-10.24-23.63077-23.630769s10.24-23.630769 23.63077-23.630769h118.153846c13.390769 0 23.630769 10.24 23.630769 23.630769s-10.24 23.630769-23.630769 23.630769zM905.846154 299.323077h-59.076923c-13.390769 0-23.630769-10.24-23.630769-23.630769s10.24-23.630769 23.630769-23.63077h59.076923c13.390769 0 23.630769 10.24 23.630769 23.63077s-10.24 23.630769-23.630769 23.630769zM905.846154 378.092308h-118.153846c-13.390769 0-23.630769-10.24-23.63077-23.63077s10.24-23.630769 23.63077-23.630769h118.153846c13.390769 0 23.630769 10.24 23.630769 23.630769s-10.24 23.630769-23.630769 23.63077zM905.846154 456.861538h-59.076923c-13.390769 0-23.630769-10.24-23.630769-23.630769s10.24-23.630769 23.630769-23.630769h59.076923c13.390769 0 23.630769 10.24 23.630769 23.630769s-10.24 23.630769-23.630769 23.630769zM905.846154 535.630769h-118.153846c-13.390769 0-23.630769-10.24-23.63077-23.630769s10.24-23.630769 23.63077-23.630769h118.153846c13.390769 0 23.630769 10.24 23.630769 23.630769s-10.24 23.630769-23.630769 23.630769zM905.846154 614.4h-59.076923c-13.390769 0-23.630769-10.24-23.630769-23.630769s10.24-23.630769 23.630769-23.630769h59.076923c13.390769 0 23.630769 10.24 23.630769 23.630769s-10.24 23.630769-23.630769 23.630769zM905.846154 693.169231h-118.153846c-13.390769 0-23.630769-10.24-23.63077-23.630769s10.24-23.630769 23.63077-23.63077h118.153846c13.390769 0 23.630769 10.24 23.630769 23.63077s-10.24 23.630769-23.630769 23.630769zM905.846154 771.938462h-59.076923c-13.390769 0-23.630769-10.24-23.630769-23.63077s10.24-23.630769 23.630769-23.630769h59.076923c13.390769 0 23.630769 10.24 23.630769 23.630769s-10.24 23.630769-23.630769 23.63077zM905.846154 850.707692h-118.153846c-13.390769 0-23.630769-10.24-23.63077-23.630769s10.24-23.630769 23.63077-23.630769h118.153846c13.390769 0 23.630769 10.24 23.630769 23.630769s-10.24 23.630769-23.630769 23.630769z" fill="#7F7F7F" p-id="1035"></path><path d="M590.769231 937.353846H118.153846c-17.329231 0-31.507692-14.178462-31.507692-31.507692V118.153846c0-14.178462 9.452308-26.781538 22.843077-30.72s28.356923 2.363077 35.446154 14.178462l472.615384 787.692307c5.513846 9.452308 6.301538 22.055385 0.787693 31.507693S601.796923 937.353846 590.769231 937.353846z m-441.107693-63.015384h385.181539L149.661538 231.581538V874.338462z" fill="#7F7F7F" p-id="1036"></path><path d="M397.784615 807.384615h-165.415384v-275.692307z" fill="#BFBFBF" p-id="1037"></path></svg>数学</h1>
+    <div class="math">
+
+    </div>
+
         
         
 
@@ -62,15 +68,20 @@
 
     <!-- DOM操作代码 -->
     <script>
+        // 根据屏幕大小判断手机端
+        var isMobile = window.innerWidth < 768 ? true : false;
+
+
+
         var rescources = {
             physics:[{
             title:"[百度云网盘]高明静 2023高三高考物理 S班 暑秋寒春合集",
             url:"https://pan.baidu.com/share/init?surl=m0mS4A3vh6ylknHY2zsTrw",
             pwd:"d6kz"
         },{'title': '姜婷婷2020秋 高二物理秋季班 15讲带讲义完结', 'url': 'https://pan.baidu.com/share/init?surl=bdi5-8krXWw2sxI9wEj6fA', 'pwd': 'r9zz'}, {'title': '【2021秋】易物理.高二物理冲顶班（袁帅）', 'url': 'https://pan.baidu.com/share/init?surl=yr9EMkzCDJdq5yJby9Nygg', 'pwd': 'zwgd'}, 
-{'title': '2023高考物理 一轮复习联报暑假班夏梦迪', 'url': 'https://pan.baidu.com/share/init?surl=ITku4BP87FNRF5EWayO5Yw', 'pwd': 'ugfj'}, {'title': '高中物理 技巧笔记—秋季月考期中期末冲分秘籍 ', 'url': 'https://pan.baidu.com/share/init?surl=XTNI6z5XQYBPYd30jeKD8w', 'pwd': 'yon4'}],
-english:[{'title': '高考英语必考语法系列', 'url': 'https://pan.baidu.com/share/init?surl=slDHysX', 'pwd': 'sk8x'}, {'title': '陶然 2023高三高考英 一二轮复习 暑秋寒春合集', 'url': 'https://pan.baidu.com/share/init?surl=yFtIb_nf1CjSRHOx88zapA', 'pwd': 'sl02'}, {'title': '28天单词突围训练营 熟背高考英语3500词', 'url': 'https://pan.baidu.com/share/init?surl=qPBiLasAvqrIQIERNj8Kpw', 'pwd': 'me85'}, {'title': '陶然 2023高三高考英 寒假班', 'url': 'https://pan.baidu.com/share/init?surl=hCJbVYkethsBzik8zd8Lfw', 'pwd': 'nv0j'}, {'title': '袁慧 2023 高三高考英语 A班寒假班 ', 'url': 'https://pan.baidu.com/share/init?surl=00EbdIAG11ZxZOgLqYH7Kw', 'pwd': 'plyw'}, {'title': '英语名师董宇辉高考写作专项提升班', 'url': 'https://pan.baidu.com/share/init?surl=fyw3GtrTLnrEXDW2oc3GjQ', 'pwd': '2408'}, {'title': '石雷鹏 2023英语写作高分冲刺密训班', 'url': 'https://pan.baidu.com/share/init?surl=YGdM5V7GlEbdEXLRmK8UGg', 'pwd': 's6ri'}]
-        }
+{'title': '2023高考物理 一轮复习联报暑假班夏梦迪', 'url': 'https://pan.baidu.com/share/init?surl=ITku4BP87FNRF5EWayO5Yw', 'pwd': 'ugfj'}, {'title': '高中物理 技巧笔记—秋季月考期中期末冲分秘籍 ', 'url': 'https://pan.baidu.com/share/init?surl=XTNI6z5XQYBPYd30jeKD8w', 'pwd': 'yon4'},{'title': '坤哥2023高三高考物理 二轮寒假班 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=3ymNBpo001jeLb7fHW8-gw', 'pwd': 'o4xl'}, {'title': '李婷怡 2023高二物理 A+寒假班 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=8bAc3xRquWCDa_prDxGXbw', 'pwd': 'z4kz'}, {'title': '林婉晴 2023高三高考物理 A班一轮复习 暑假班 秋季班 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=wQ7_2i7QBtpojcqwrJV3ng', 'pwd': '29w9'}, {'title': '于冲2022届高考物理一至四阶段复习联报 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=luptGESXnUaW8hL2f1i0dA', 'pwd': 'w84z'}, {'title': '名师讲座【高二物理】 2022春目标A+班章进 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=FDlLI2gidL3tZQg88hDv0w', 'pwd': '8enx'}, {'title': '【22届】高二物理尖端（郑梦遥）秋季班 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=VYOZGFlyMRiUU8cGI3PNgA', 'pwd': '6dxj'}, {'title': '【22届】高二物理尖端（郑梦遥）暑假班 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=SUFrJT6hgcUL-0EP2XEi7Q', 'pwd': '8bda'}, {'title': '李永乐高中物理全套视频网课 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=PdVA436xTqKLuUvpubpqrg', 'pwd': 'kktd'}, {'title': '梁冰 2021寒假 高二物理寒假系统班 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=rYzY3TnFw9XdiCk5CMlXSw', 'pwd': 'dl51'}],
+english:[{'title': '高考英语必考语法系列', 'url': 'https://pan.baidu.com/share/init?surl=slDHysX', 'pwd': 'sk8x'}, {'title': '陶然 2023高三高考英 一二轮复习 暑秋寒春合集', 'url': 'https://pan.baidu.com/share/init?surl=yFtIb_nf1CjSRHOx88zapA', 'pwd': 'sl02'}, {'title': '28天单词突围训练营 熟背高考英语3500词', 'url': 'https://pan.baidu.com/share/init?surl=qPBiLasAvqrIQIERNj8Kpw', 'pwd': 'me85'}, {'title': '陶然 2023高三高考英 寒假班', 'url': 'https://pan.baidu.com/share/init?surl=hCJbVYkethsBzik8zd8Lfw', 'pwd': 'nv0j'}, {'title': '袁慧 2023 高三高考英语 A班寒假班 ', 'url': 'https://pan.baidu.com/share/init?surl=00EbdIAG11ZxZOgLqYH7Kw', 'pwd': 'plyw'}, {'title': '英语名师董宇辉高考写作专项提升班', 'url': 'https://pan.baidu.com/share/init?surl=fyw3GtrTLnrEXDW2oc3GjQ', 'pwd': '2408'}, {'title': '石雷鹏 2023英语写作高分冲刺密训班', 'url': 'https://pan.baidu.com/share/init?surl=YGdM5V7GlEbdEXLRmK8UGg', 'pwd': 's6ri'}],
+        math:[{'title': '肖晗 2023高二数学 全年复习 暑秋寒春合集', 'url': 'https://pan.baidu.com/share/init?surl=EtW1IWcbRyVrxfSP_KM2nQ', 'pwd': '646u'}, {'title': '胡源 2023高二数学全年', 'url': 'https://pan.baidu.com/share/init?surl=97Ksz1NqitwEdKGJIuHPcw', 'pwd': 'wv97'}, {'title': '谭梦云 2023高三高考数学 S一二轮全年复习 暑秋寒春合集', 'url': 'https://pan.baidu.com/share/init?surl=o7vvZGiUu4B0sQhTRIbOtg', 'pwd': '1e5h'}, {'title': '朱昊鲲高考数学真题及参考答案', 'url': 'https://pan.baidu.com/share/init?surl=I9cQY4lU_fvJbsU_BNI-Wg', 'pwd': '735c'}, {'title': '高二数学同步课胡杰导数同步课（带讲义）', 'url': 'https://pan.baidu.com/share/init?surl=eMDBweuf0c0nH9EECbufrQ', 'pwd': '1234'}, {'title': '2023高三高考数学 王嘉庆 第一阶段 第二阶段', 'url': 'https://pan.baidu.com/share/init?surl=VY_Z4vBBRzEWnRftPG2uYQ', 'pwd': 'q5nz'}, {'title': '赵礼显 2023年高中 高二数学 寒假班', 'url': 'https://pan.baidu.com/share/init?surl=tCKUJXbS3lIr1zornNj-Eg', 'pwd': 'nfw3'}, {'title': '[百度云网盘]林泽田 2023高二数学 A+ 寒假班', 'url': 'https://pan.baidu.com/share/init?surl=J0niGnYSxU9pKGk9oPSVAg', 'pwd': 'qcfu'},{'title': '问延伟 2023高三高考数学 暑假班 秋季班 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=-rjGqdwevJGa29SzBXJnaA', 'pwd': 'l1g8'}, {'title': '王晶2022届高考数学二轮复习寒春联报 春季班 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=FVJSgm4U8Av3TKEXD1aBNA', 'pwd': 'c9b5'}, {'title': '张华2022届高考数学冲顶班二轮复习联报 寒假班 春季班 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=ZMrQVmQ5BlHxf2wkBhcg1w', 'pwd': '1ah6'}, {'title': '赵礼显 2021寒 高一数学寒假系统班 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=0UZiSCV6WnTGO8y2oH5yqg', 'pwd': 'rdh3'}, {'title': '高二数学2022春A+傅博宇 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=pOPhNxbiy4Z5OAnoFoyeyQ', 'pwd': '3ky5'}, {'title': '朱昊鲲2022届高考数学二轮复习联报 决胜班 基础班第二季 - 高中百度网盘学习资料', 'url': 'https://pan.baidu.com/share/init?surl=P9mGwdZej_j5Pt1x5PAPVA', 'pwd': '5tq9'}]}
 
 
         // 资源统计
@@ -103,11 +114,14 @@ english:[{'title': '高考英语必考语法系列', 'url': 'https://pan.baidu.c
         insertList(physics,'physics','phy_child')
         let english = document.querySelector(".english");
         insertList(english,'english','en_child')
+        let math = document.querySelector(".math");
+        insertList(math,'math','math_child')
         
 
         // 批量添加监听事件
         addlistener('.phy_child','physics')
         addlistener('.en_child','english')
+        addlistener('.math_child','math')
 
 
 
@@ -125,7 +139,12 @@ english:[{'title': '高考英语必考语法系列', 'url': 'https://pan.baidu.c
         function handle_clicked(item,subject){
                 indexx = parseInt(item.getAttribute("data-index"));
                 current = rescources[subject][indexx];
-                ice.alert("5s后跳转到网盘页,密码已复制到剪切板...<br>注意：不支持手机端！");
+                if (isMobile) {
+                    ice.alert(`手机端:请复制网址到浏览器打开<br><div style="color:red">${current.url}<br>密码:${current.pwd}</div>`);
+                } else {
+                    ice.alert("电脑端提示:5s后跳转到网盘页,密码已复制到剪切板...");
+                }
+                
                 navigator.clipboard.writeText(current.pwd);
                 setTimeout(() => {
                     // location.replace(current.url);
