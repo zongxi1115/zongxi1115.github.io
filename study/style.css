@@ -53,15 +53,35 @@ h1{
 xy-tips{
     padding: 0 10px!important;
 }
-
 /* rs即列表内容 */
 .rs{
     padding-top: 5px;
     margin-left: 15px;
     cursor: pointer;
     text-decoration: solid;
+
+
 }
 .rs:hover{
     color: cornflowerblue;
     transition: 0.4s;
+}
+
+/* 右键菜单 */
+.menu{
+    display:none;position: fixed;z-index: 5;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+.menu li{
+    list-style: none;
+    padding: 5px;
+    cursor: pointer;
+}
+.menu li a{
+    display: block;
+}
+.menu li:hover{
+    background-color: #eee;
 }
