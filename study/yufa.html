@@ -18,6 +18,8 @@
     <div class="intro">
         <p style="font-weight: 700;">第二节 (共10小题；每小题1.5分，满分15分)</p>阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。
     </div>
+    <div style="font-family: '黑体'; color: red;">本题我上次的得分: <span class="last"></span> </div>
+    <div>本题我已用时:<i class="icon ice-time"></i> <span class="timer">0</span>  s &nbsp;&nbsp;&nbsp;&nbsp;本题限时<i class="icon ice-time"></i> :2min</div>
     <question></question>
 
     <div class="btn-group flex" style="flex: space-between;position: relative;">
@@ -26,6 +28,10 @@
             点击批阅
         </div>
         <div class="right-cnt">
+        </div>
+        <div class="btn btn-blue next">
+            <i class="icon ice-next "></i>
+            下一题
         </div>
     </div>
 
@@ -44,6 +50,7 @@
 
 </body>
 <script>
+    // 配置参数
     var data = [{
         questions: `New Year's Eve is the last day of the year. It is always an exciting time because 
     people look forward to ________(welcome) a new year. It is also a good time to 
@@ -78,7 +85,7 @@ Giant pandas also serve __ an umbrella species (物种), bringing protection to 
         ,
         answers: ['Covering', 'the', 'were', 'to increase', 'is designed', 'and', 'popuplation', 'eventually', 'as', 'that']
     }, {
-        questions:`As Alison Gopnik described in her recent book, there are two kinds of parents in modern America: The Carpenter and the Gardener. The "carpenter" thinks that his or her child can________(shape). "The idea is that if you just do the right things, get the right skills and read the right books, you're going to be able to turn your child ________a particular kind of adult，" she said
+        questions: `As Alison Gopnik described in her recent book, there are two kinds of parents in modern America: The Carpenter and the Gardener. The "carpenter" thinks that his or her child can________(shape). "The idea is that if you just do the right things, get the right skills and read the right books, you're going to be able to turn your child ________a particular kind of adult，" she said
 
 The "gardener", however is seldom concerned about ________ (control) what the child will become and instead provides a protected space ________explore). The style is all about:" creating a rich, nutritious but also variable, diverse, active ecosystem".
 
@@ -86,9 +93,9 @@ Gopnik, a psychology and philosophy professor at the University of California, B
 
 "We're so concerned about our children ________ we think have difficulty mastering their own future that we're unwilling to allow them to ________ (free) explore the world." she says. The truth is that the ________ (little) that parents worry about outcomes, the better their children may live in life.`,
         // be shaped；into；controlling；to explore；it；found；anxious；who/that；freely；less
-        answers:['be shaped','into','controlling','to explore','it','found','anxious','who','freely','less']
-    },{
-        questions:`Who are better at science in your class, girls or boys? These years, girls start to show more interest in the ________ (subject) of science, technology, engineering and Maths (STEM), according to a recent study from the UK.
+        answers: ['be shaped', 'into', 'controlling', 'to explore', 'it', 'found', 'anxious', 'who', 'freely', 'less']
+    }, {
+        questions: `Who are better at science in your class, girls or boys? These years, girls start to show more interest in the ________ (subject) of science, technology, engineering and Maths (STEM), according to a recent study from the UK.
 
 In the study, every year over the last seven years, over 20,000 students ________ were in their final year in high school were surveyed. As for university courses, ________ number of girls considering choosing STEM subjects has a ________ (big) increase than that of boys. Over one-fifth of the girls surveyed said they were considering jobs ________ (relate) to STEM, such as engineers. And the interest in engineering and science has also risen.
 
@@ -97,18 +104,18 @@ This is an important change for women in the UK. But at present, there are not n
 Are men really more suited to STEM work than women? Of course not. This is ________ (part) because of the conventional idea, which means many people think so, even though it is not correct.
 
 "It is important that young women should ________ (encourage) to get into these jobs. In fact, STEM subjects are fun and exciting. Studying science can do ________ (we) good. It offers women chances of taking up fantastic careers and they will get higher pay in these areas," said Niki Yates, manager of GSK's business.`,
-//  subjects；who/that；the；bigger；related；as；from；partly；be encouraged；us 
-        answers:['subjects','who','the','bigger','related','as','from','partly','be encouraged','us']
-    },{
-        questions:`Ever wondered how many calories are in the human body? Or ever wondered why old people have ________ (big) ears than they used to? The winners of Ig Nobel Prizes (搞笑诺贝尔奖) have got the answers.
+        //  subjects；who/that；the；bigger；related；as；from；partly；be encouraged；us 
+        answers: ['subjects', 'who', 'the', 'bigger', 'related', 'as', 'from', 'partly', 'be encouraged', 'us']
+    }, {
+        questions: `Ever wondered how many calories are in the human body? Or ever wondered why old people have ________ (big) ears than they used to? The winners of Ig Nobel Prizes (搞笑诺贝尔奖) have got the answers.
 
 He Ig Nobel Prizes, founded in 1991, are to honor achievements ________ first make people laugh, and then make them think, The ceremony ________ (take) place at Harvard University every year. Winners' acceptance ________(speech) are limited to 60 seconds, ________ (strict) policed by an eight-year-old girl.
 
 The honored research might seem ridiculous ________ first sight, but that doesn't mean it lacks scientific value. For example, the research in 2006 on why dry spaghetti tends to break into more than two pieces was important ________ (discover) failure in bridge spans (跨度) or human bones And a follow-up paper ________ (publish) by MIT physicists several years later. But people are more likely to read about ________ (break) spaghetti than to read an academic paper. Even when there is no immediate usefulness, ________ is still good to encourage people to observe and think.`
-// bigger；that/ which；takes；speeches；strictly；at；to discover；was published；breaking；it
-        ,answers:['bigger','which','takes','speeches','strictly','at','to discover','was published','breaking','it']
-    },{
-        questions:`Kobe Bryant is a famous basketball player. His talent can ________(see) not only on the court, but also in his writing. ________book The Wizenard Series: Training Camp came out in March.
+        // bigger；that/ which；takes；speeches；strictly；at；to discover；was published；breaking；it
+        , answers: ['bigger', 'which', 'takes', 'speeches', 'strictly', 'at', 'to discover', 'was published', 'breaking', 'it']
+    }, {
+        questions: `Kobe Bryant is a famous basketball player. His talent can ________(see) not only on the court, but also in his writing. ________book The Wizenard Series: Training Camp came out in March.
 
 The story is ________the West Bottom Badgers, a youth basketball team. It's made up of five books, with each ________(focus) on the story of one character: Rain, Twig, Cash, Peno and Lab. All of the kids on this team come from a poor neighborhood. No one ________ (have) faith in the kids to succeed, ________things change after a new coach joins the team.
 
@@ -117,18 +124,30 @@ After reading the book, we got to interview Bryant. He said he didn't think he w
 Bryant had two different jersey numbers - 8 and 24 - during his career. ________ number 24 means you need to work hard 24 hours a day ________ (succeed).
 
 Our final thoughts on Bryant - he is cool and very funny.`,
-// be seen；His；about；focusing/focused；has；but；reasons；especially；The；to succeed
-answers:['be seen','His','about','focusing','has','but','reasons','especially','The','to succeed']
+        // be seen；His；about；focusing/focused；has；but；reasons；especially；The；to succeed
+        answers: ['be seen', 'His', 'about', 'focusing', 'has', 'but', 'reasons', 'especially', 'The', 'to succeed']
 
     }
     ]
+    var have_marked = false;
+    // 给timer赋值，用于计时
+    var timer = 0;
+    clock = setInterval(() => {
+        if(timer == 119){
+            clearInterval(clock);
+            yes();
+        }
+        timer += 1;
+        document.querySelector(".timer").innerHTML = timer;
+    }, 1000);
 
 
 
 
 
-    // 获取网页？后的参数
+    // 获取网页？后的参数,网页初始化
     url = window.location.href;
+
     if (url.indexOf('?') > -1) {
         after = url.substring(url.indexOf('?') + 1,).split('=');
         question_index = parseInt(after[1])
@@ -138,34 +157,18 @@ answers:['be seen','His','about','focusing','has','but','reasons','especially','
     // console.log(url);
     document.querySelector(".num").innerHTML = question_index + 1;
 
-    // showAnswer函数
-    function showAnswer() {
-        answerArea = document.querySelector(".check-bar");
-        answerArea.style.display = "block";
-        //给answerArea添加淡入效果
-        // answerArea.classList.add("ani","ani-right-in");
-        var contents = `<div class="answer">${data[question_index].answers.join('<br>')}</div>`;
-        answerArea.innerHTML = contents;
 
-    }
 
 
 
 
     questions = data[question_index].questions.replace(/_{2,}/g, '&nbsp;&nbsp;<span class="f"><input type="text" class="complete"></span>&nbsp;&nbsp;')
     document.querySelector("question").innerHTML = questions.replace("\n", "<br>");
+    document.querySelector(".last").innerHTML = localStorage.getItem(question_index);
 
-
-
-    // 批阅函数
-    document.querySelector(".mark").onclick = () => { mark(); }
-    function mark() {
-        ice.alert({
-            content: "是否提交？<br>友情提示：区分空格和大小写，请检查后提交。",
-            yes: yes
-        });
-        function yes() {
-
+    function yes() {
+            have_marked = true;
+            clearInterval(clock);
             let rightCnt = 0;
             all_inputs = document.querySelectorAll(".complete")
             let index = 0;
@@ -178,13 +181,39 @@ answers:['be seen','His','about','focusing','has','but','reasons','especially','
 
             });
             let cnt = document.querySelector(".right-cnt");
-            cnt.innerText = '-' + (10 - rightCnt) * 1.5 + '分（满分15分）';
+            let getScore = (10 - rightCnt) * 1.5 
+            cnt.innerText = '-' +getScore+ '分（满分15分）';
+            localStorage.setItem(question_index, 15-getScore)
             cnt.style.display = 'block';
             document.querySelector(".check").style.display = 'block';
         }
+
+    // 批阅函数
+    document.querySelector(".mark").onclick = () => { mark(); }
+    function mark() {
+        if (have_marked) {
+            return ice.alert("已经提交过,不可重复提交！");
+        }
+        ice.alert({
+            content: "是否提交？<br>友情提示：区分空格和大小写，请检查后提交。",
+            yes: yes
+        });
+  
+    }
+    
+
+    // 下一题函数
+    document.querySelector(".next").onclick = () => {
+
+            if (question_index < data.length - 1) {
+                window.location.href = `./yufa.html?index=${question_index + 1}`;
+            } else {
+                window.location.href = `./yufa.html?index=${0}`;
+            }
     }
 
 
+    // 防作弊函数
     document.addEventListener("contextmenu", (e) => {
         e.preventDefault();
         ice.prompt({
@@ -193,6 +222,17 @@ answers:['be seen','His','about','focusing','has','but','reasons','especially','
             time: 1000
         });
     })
+
+    // showAnswer函数
+    function showAnswer() {
+        answerArea = document.querySelector(".check-bar");
+        answerArea.style.display = "block";
+        //给answerArea添加淡入效果
+        // answerArea.classList.add("ani","ani-right-in");
+        var contents = `<div class="answer">${data[question_index].answers.join('<br>')}</div>`;
+        answerArea.innerHTML = contents;
+
+    }
 
 </script>
 
