@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="txw_answer.css">
+    <link rel="stylesheet" href="./src/ui/ui.css">
+    <script src="./src/ice.js"> </script>
+    <script src="./src/ui/ui.js"></script>
+</head>
+
+<body>
+    <div class="tips flex">
+        <div class="content">
+            <div class="left">
+                <i class="icon ice-quote" style="font-size: 32px;"></i>
+            </div>
+            网站改版!现听力答案部署至<b>本页面</b> <br>你也可以通过访问 <a href="https://zongxier.me/study">我的主页</a> 在英语学科通道中找到进入此页面的按钮~
+            
+            <br>声明:.1.如果你是来自群内的同学,请不要将此页面分享给其他人,以免造成不必要的麻烦.2.如果你没有及时得到答案,请在群内@我
+        </div>
+        <div class="close">
+        </div>
+    </div>
+
+    <div class="verify">
+        <div class="input">
+            请输入我在群中的昵称:
+            <input type="text" name="fsddflk" placeholder="在此输入" class="check" autocomplete="off">
+        </div>
+        <div class="btn" onclick="verify()">验证</div>
+    </div>
+
+
+    <div class="main" style="display:none">
+        现在可以查询的答案有: <span class="have"></span>
+        <div class="inputs">
+            听力中级(
+            <input type="text" placeholder="数字" class="number" name="dasda">
+            )答案查询:
+            <div class="btn border-blue" onclick="giveAnswer(document.querySelector('.number').value)">查询答案</div>
+        </div>
+
+        <div class="show-answer" style="font-size: large;">
+
+
+
+        </div>
+    </div>
+
+</body>
+
+<script src="./encryped.js"></script>
+
+</html>

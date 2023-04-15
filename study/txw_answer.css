@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+:root {
+    --tip-height: 120px
+}
+
+/* tips内容界面css */
+.content {
+    flex: 9;
+    background-color: rgba(117, 201, 69, 0.4);
+    padding: 10px 0 10px 15px;
+}
+
+.close {
+    position: relative;
+    right: 5%;
+    cursor: pointer;
+}
+
+.tips {
+    height: var(--tip-height);
+    margin: 20px 10%;
+    border: none;
+    border-radius: 2px 5px 15px 2px;
+    overflow: hidden;
+}
+/* 手机端增加高度 */
+@media screen and (max-width: 768px) {
+    .tips {
+        height: 220px;
+    }
+}
+
+.tips::before {
+    display: block;
+    width: 3px;
+    height: 100%;
+    background-color: brown;
+    content: '';
+    border-radius: 1px solid;
+}
+/* 验证css */
+.verify {
+    text-align: center;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+/* 数字input框 */
+input.number {
+    width: 40px;
+    padding: 0;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+/* 水印css */
+.show-answer{
+    position:relative
+}
+
+.watermark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: rgba(0, 0, 0, 0.2);
+    z-index: -999;
+    font-size: 35px;
+    transform: rotate(-30deg) translate(100px);
+}
