@@ -10,8 +10,11 @@ body {
     height: 100%;
 }
 
+a{
+    user-select: text!important;
+}
 :root {
-    --tip-height: 120px
+    --tip-height: 100px
 }
 
 /* tips内容界面css */
