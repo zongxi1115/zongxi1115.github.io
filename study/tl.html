@@ -129,7 +129,7 @@ var pictures = {
 for (const key in contents) {
     var value = contents[key];
     if (value.indexOf('跳转') == -1) {
-        if (value.indexOf('sp') != -1) {
+        if (value == 'sp') {
             contents[key] = `<video src="./video/${key}.mp4" class="x" controls="controls"  ></video>`;
 
         }
