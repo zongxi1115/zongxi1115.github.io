@@ -54,6 +54,19 @@
     </div>
 </body>
 <script>
+//     用户配置
+    user_info = {
+        // 后面的值为userId码,10位随机字符串
+        马超:'Ifirqp2jPM',
+        泌淼:'95SWhbuI16',
+        宇航:'9Y5Q8X2Z2A',
+        天佑:'D2Y7X2Z2A9',
+        临时:'X2Z2A9Y5Q8',
+        临时2:'zongxier',
+    }
+    
+    
+    
     // 初始配置
     // 检测宽度是否小于768px
     var isMobile = window.innerWidth < 768;
@@ -67,10 +80,7 @@
     var user = window.location.search.split('=')[1];
     console.log(user,typeof (user));
 
-    user_info = {
-        // 后面的值为userId码,10位随机字符串
-        马超:'Ifirqp2jPM'
-    }
+    
     username = undefined;
     for (const key in user_info) {
         if (user_info.hasOwnProperty(key)) {
