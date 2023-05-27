@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="txw_answer.css">
+    <link rel="stylesheet" href="../src/ui/ui.css">
+    <script src="../src/ice.js"> </script>
+    <script src="../src/ui/ui.js"></script>
+</head>
+
+<body>
+    <div class="tips flex">
+        <div class="content">
+            <div class="left">
+                <i class="icon ice-quote" style="font-size: 32px;"></i>
+            </div>
+            网站改版!现听力答案部署至<b>本页面</b> 
+            <!-- <br>你也可以通过访问 <a href="https://zongxier.me/study">我的主页</a> 在英语学科通道中找到进入此页面的按钮~ -->
+
+            <br>声明:1.如果你是来自群内的同学,请不要将此页面分享给其他人,以免造成不必要的麻烦.<br>2.如果你没有及时得到答案,请在群内@我
+        </div>
+        <div class="close">
+        </div>
+    </div>
+
+    <div class="verify">
+        <div class="input">
+            请输入我在群中的昵称:
+            <input type="text" name="fsddflk" placeholder="在此输入" class="check" autocomplete="off">
+        </div>
+        <div class="btn" onclick="verify()">验证</div>
+    </div>
+
+
+    <div class="main" style="display:none;user-select: none;">
+        现在可以查询的答案有: <span class="have"></span>
+        <div class="inputs">
+            听力中级(
+            <input type="text" placeholder="数字" class="number" name="dasda">
+            )答案查询:
+            <div class="btn border-blue" onclick="giveAnswer(document.querySelector('.number').value)">查询答案</div>
+        </div>
+
+        <div class="show-answer" style="font-size: large;">
+
+
+
+        </div>
+    </div>
+</body>
+<script>
+    // 初始配置
+    // 检测宽度是否小于768px
+    var isMobile = window.innerWidth < 768;
+    var success = true;
+    var test = true;
+    var test_pass = true;
+
+
+
+    // 获取网址?后的userId参数
+    var user = window.location.search.split('=')[1];
+    console.log(user,typeof (user));
+
+    user_info = {
+        // 后面的值为userId码,10位随机字符串
+        马超:'Ifirqp2jPM'
+    }
+    username = undefined;
+    for (const key in user_info) {
+        if (user_info.hasOwnProperty(key)) {
+            const element = user_info[key];
+            if(element == user){
+                username = key;
+            }
+        }
+    }
+    console.log(username);
+
+
+
+
+    // 通过userId码进入页面
+    if (typeof (user) == 'undefined'){
+        document.querySelector(".verify").innerHTML = '请通过我userId码进入此页面';
+    }else{
+        if(typeof (username) == 'undefined'){
+            document.querySelector(".verify").innerHTML = '你的userId码不正确,请检查管理员发放网址是否粘贴正确';
+        }else{
+            ice.alert('欢迎你,'+username+',请遵守网站规则');
+            init();
+        }
+    }
+
+
+
+
+
+
+    // 答案变量存储
+    var contents = {
+    93: `中级九十三<br> 1. Look for a cat<br> 2. Lisa<br> 3. The weather<br> 4. By taxi<br> 5. Swim<br> 6. Saving a wildlife reserve in Africa<br> 7. A toy<br> 8. It saves a lot of time<br> 9. In the morning<br> 10. Co-workers<br> 11. Nervous<br> 12. In a cafe<br> 13. Make a cake<br> 14. It was shown in a coffee shop<br> 15. Around 1906<br> 16. Digital video cameras<br> 17. In the man's house<br> 18. On a screen<br> 19. 115<br> 20. Math<br>`,
+    94: `中级九十四<br>1. On Tuesday<br>2. He made a grammar mistake in a speech contest<br>3. Outside a bookstore<br>4. At 4:30 p.m.<br>5. By offering him a book<br>6. Preparing a meal<br>7. Tidy the kitchen<br>8. Upset<br>9. His parents<br>10. Science classes<br>11. Make better decisions<br>12. He was hard to communicate with<br>13. Friends<br>14. At the airport<br>15. Have a meeting<br>16. At about 6:00 p.m.<br>17. Some has got a promotion<br>18. She increased the sales<br>19. Public praise<br>20. Give a speech<br>`,
+    97: `中级九十七<br>1. Confused<br>2. Hamburger and salad<br>3. Once a day<br>4. Go to an appointment<br>5. In a library<br>6.60 minutes<br>7. There are too many cars on the road<br>8. A boat<br>9. Holes in the body<br>10. Co-wokers<br>11. She feels lonely at home<br>12. China<br>13. It has a nice environment<br>14. In four months<br>15. History<br>16. She wants to relax in the next few days<br>17. Russia<br>18. A university professor<br>19. In the office<br>20. How to research languages<br>`,
+    98: `1.rain<br>2.Co-workers<br>3.4.00<br>4.coach<br>5.creative<br>6.family<br>7.swimmer
+    <br>8.2h<br>9.countryside<br>10.home<br>11.home<br>12.tiring<br>13.chemistry<br>14.4<br>15.points<br>16.food<br>17.rules of game<br>18.speakers' grandfather<br>19.language ability<br>20.family`,
+    99: `sp`,
+    101: "中级一百零一<br>1. Swimming<br>2. Hot<br>3. By bike<br>4. Studying<br>5. 60<br>6. He didn't take it<br>7. There was an accident in the lab<br>8. Chinese<br>9. A woman<br>10. Love<br>11. Client and customer<br>12. Flexible<br>13. Two<br>14. In a bedroom<br>15. Frightened<br>16. Look for the creature<br>17. Glory<br>18. 3<br>19. An athlete<br>20. She is moving to another city",
+    102: "中级一百零二<br>1. Make a list<br>2. Russia<br>3. A business talk<br>4. Her pet<br>5. In the middle of the game<br>6. 14<br>7. He missed a lot of school<br>8. Her work<br>9. His address<br>10. In a restaurant<br>11. To spend a holiday<br>12. A hotel staff<br>13. Check in<br>14. It is simple to prepare<br>15. Beef<br>16. On the woman's table<br>17. Heat up the water<br>18. The plane will be shaking<br>19. Some seats have an electronic problem<br>20. Camera",
+    // 103: '跳转<a href="https://tieba.baidu.com/p/7819729512?pid=143970500586&cid=0#143970500586">跳转连接查看答案</a>',
+    104: 'sp',
+    // 105: 'tieba.baidu.com/p/7835023922?pid=144103789542&cid=0#144103789542',
+    // 106: 'tieba.baidu.com/p/7844726959?pid=144173755464&cid=0#144173755464',
+    // 107: 'tieba.baidu.com/p/7851454855?pid=144230210044&cid=0#144230210044',
+    // 108: 'tieba.baidu.com/p/7862331404?pid=144312888752&cid=0#144312888752',
+    // 109: 'tieba.baidu.com/p/7863205291?pid=144320690437&cid=0#144320690437',
+    // 110: '中级110<br>1pm<br>onling<br>classical<br>A<br>positive<br>he<br>eight<br>rental<br>convenient<br>go<br>delivery<br>four<br>sign<br>work<br>update<br>blue<br>pleased<br>plans<br>parents<br>doing',
+}
+var pictures = {
+    100: '测试婴喜爱'
+}
+
+
+for (const key in contents) {
+    var value = contents[key];
+    if (value.indexOf('跳转') == -1) {
+        if (value.indexOf('sp') != -1) {
+            contents[key] = `<video src="./video/${key}.mp4" class="x" controls="controls"  ></video>`;
+
+        }
+        else if (value.indexOf("tieba") != -1) {
+            contents[key] = `<a href="https://${value}">点我跳转中级${key}的答案</a>`
+        }
+    }
+
+
+
+
+    console.log(key);
+    document.querySelector(".have").innerHTML += key + " ";
+}
+
+
+
+
+
+function init() {
+    document.querySelector(".verify").style.display = "none";
+    document.querySelector(".main").style.display = "block";
+    success = true;
+
+    // 展示答案逻辑页面预处理
+
+    // 输入框监听回车事件
+    document.querySelector(".number").addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.querySelector(".border-blue").click();
+        }
+    });
+
+    // 禁止右键
+    document.addEventListener("contextmenu", (e) => {
+        console.log(12);
+        e.preventDefault();
+        ice.prompt({
+            content: '尊重劳动成果,不要复制答案',
+            btn: false,
+            time: 1000
+        });
+    })
+}
+
+
+
+function giveAnswer(index) {
+    if (success == false) {
+        ice.alert("请先验证");
+        document.querySelector(".check").focus();
+        document.querySelector(".main").style.display = "none";
+        return;
+    }
+    // 增多提示方式
+    if (index.match(/^[0-9]+$/)) {
+        index = parseInt(index);
+    } else {
+        ice.alert("请输入合法数字!");
+        return;
+    }
+
+    if (contents[index] == undefined) {
+        ice.alert("本套题答案尚未收录");
+    } else {
+        console.log(contents[index]);
+        document.querySelector(".show-answer").innerHTML = contents[index] + '<div class="watermark">'+(username+'  ').repeat(3)+'<br>请勿分享答案'+'</div>';
+
+    }
+    var water = document.querySelector(".watermark");
+    if(contents[index].indexOf("video") != -1){
+        water.style.zIndex = 10;
+    }else{
+        water.style.zIndex = -5;
+    }
+}
+</script>
+
+<!-- <script src="./encryped.js"></script>  -->
+
+</html>
