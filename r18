@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            /* 手机端适配 */
+            width: 100%;
+            height: auto;
+            /* 桌面端适配 */
+        }
+
+        button {
+            text-align: center;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: 1px solid blue;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <img src="https://image.anosu.top/pixiv/direct?r18=1&keyword=azurlane" alt=""> -->
+    <img src="" alt="">
+    <!-- <button id="reload"> 刷新 </button> -->
+    <div class="btns">
+        <button v="https://t.mwm.moe/mp">线路1</button>
+        <button v="https://api.yimian.xyz/img">线路2</button>
+        <button v="https://www.loliapi.com/acg/">线路3</button>
+        <button v="https://moe.jitsu.top/r18">线路4 <span style="font-size: x-small;">(R18)</span></button>
+        <button v="https://www.dmoe.cc/random.php">线路5</button>
+    </div>
+    <script>
+        var img = document.querySelector("img")
+        // document.querySelector('#reload').onclick = function () {
+        //     location.reload()
+        // }
+        document.querySelector(".btns").addEventListener("click", function (e) {
+            if (e.target.tagName == "BUTTON") {
+                var randomN = Math.random();
+                var v = e.target.getAttribute("v")
+                img.src = v + '?' + randomN
+            }
+        })
+    </script>
+
+
+</body>
+
+</html>
