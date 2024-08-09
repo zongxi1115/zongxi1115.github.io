@@ -19,7 +19,7 @@ const fetchData = () => {
         var now = new Date();
         var month = now.getMonth() + 1;
         var day = now.getDate();
-        if (month == 8 && day == 9) {
+        if (month == 8 && day == 10) {
           // 显示 start button
           // document.getElementById("startButton").style.display = "block";  
         } else {
