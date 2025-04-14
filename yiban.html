@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .upload {
+            margin-top: 30px;
+        }
+
+        button {
+            margin-top: 30px;
+        }
+
+        .modal-action {
+            justify-content: flex-start;
+        }
+    </style>
+</head>
+
+<body>
+    <link onerror="document.write('界面加载失败，请切换网络环境')" href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet"
+        type="text/css" />
+    <script onerror="document.write('界面加载失败，请切换网络环境')"
+        src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <select class="select type">
+        <option disabled selected>选择表的类型进行统计</option>
+        <option value="1">活跃度统计</option>
+        <option value="2">投稿数统计</option>
+        <option value="3">轻应用统计</option>
+    </select>
+
+    <div class="upload"> 请上传导出文件：<input type="file" class="file-input file-input-info" id="file" />
+    </div>
+
+    <button class="btn btn-info flex items-center justify-center   mt-4" onclick="submitTask()">上传文件</button>
+
+
+    <!-- The button to open modal -->
+    <!-- <label for="my_modal_6" class="btn">open modal</label>
+
+    <input type="checkbox" id="my_modal_6" class="modal-toggle" /> -->
+    <!-- Open the modal using ID.showModal() method -->
+    <!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
+    <dialog id="my_modal_1" class="modal">
+        <div class="modal-box">
+            <h3 class="text-lg font-bold">存在学院缺失</h3>
+            <p class="py-4">
+
+            </p>
+            <div class="modal-action">
+                <form method="dialog" class="inner">
+                    <div class="persons"></div>
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn ddd">确认</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+    <script>
+
+
+
+        // 设置 URL 前缀
+        // const urlPrefix = 'https://flask-web-fraework-rg-vnahuvibuq.cn-hangzhou.fcapp.run';
+        const urlPrefix = 'http://192.168.43.138:9000'
+        // 保存原始的 fetch 函数
+        const originalFetch = window.fetch;
+
+        // 覆盖全局的 fetch 函数
+        window.fetch = function (input, init = {}) {
+            let url;
+            if (typeof input === 'string') {
+                url = `${urlPrefix}${input}`;
+                console.log(url);
+
+            } else if (input instanceof Request) {
+                url = new URL(input.url, urlPrefix);
+                input = new Request(url, input);
+            }
+            return originalFetch(url, init);
+        };
+
+        var colleges = ['商学院',
+            '法学院',
+            '马克思主义学院',
+            '体育学院',
+            '化学化工学院',
+            '教科学院',
+            '数学科学学院',
+            '新闻与传媒学院',
+            '护理学院',
+            '水利科学与工程学院',
+            '物理科学与技术学院',
+            '兽医学院',
+            '社会发展学院',
+            '环境科学与工程学院',
+            '文学院',
+            '生物科学与技术学院',
+            '农学院',
+            '信息工程学院',
+            '植物保护学院',
+            '电气与能源动力工程学院',
+            '建筑科学与工程学院',
+            '食品科学与工程学院',
+            '音乐学院',
+            '机械工程学院',
+            '美术与设计学院',
+            '动物科学与技术学院',
+            '外国语学院',
+            '医学院',
+            '园艺园林学院',
+            '旅游烹饪学院',
+            '学前教育学院',
+            '学生工作处']
+        function html() {
+            let el = document.createElement('select');
+            el.className = 'selection select';
+            colleges.forEach(function (college) {
+                let option = document.createElement('option');
+                option.value = college;
+                option.innerHTML = college;
+                el.appendChild(option);
+            })
+            return el.outerHTML;
+        }
+        var lacks = ['王二', '离散'];
+
+        document.querySelector(".ddd").addEventListener('click', function () {
+            submit();
+        })
+
+
+        function showLack(lacks) {
+            let modal = document.querySelector('#my_modal_1');
+            modal.querySelector('.text-lg').textContent = '存在学院缺失';
+            lacks.forEach(function (lack) {
+                let person = document.createElement('div');
+                let name = document.createElement('span');
+                name.textContent = lack;
+                name.className = 'name_';
+
+                person.innerHTML = name.outerHTML + html();
+                person.className = 'person';
+                document.querySelector('.persons').appendChild(person);
+            })
+            modal.showModal();
+        }
+
+        // my_modal_1.showModal()
+        let upload = document.querySelector('#file');
+        // upload.addEventListener('change', function () {
+        //     let file = this.files[0];
+        //     let reader = new FileReader();
+        //     reader.readAsText(file);
+        //     reader.onload = function () {
+        //         // let data = JSON.parse(reader.result);
+        //         console.log(reader.result);
+        //     }
+        // });
+
+
+        function submit() {
+            let datas = document.querySelectorAll(".person");
+            let input_data = {};
+            datas.forEach(function (data) {
+                let college = data.querySelector('.select').value;
+                let name = data.querySelector('.name_').textContent;
+                input_data[name] = college;
+            })
+            console.log(input_data);
+            submitTask(input_data);
+
+        }
+        async function submitTask(inputData = {}) {
+            let formData = new FormData();
+            let file = document.querySelector('#file').files[0];
+            console.log(file);
+            if (!file) {
+                return alert("请上传文件");
+            }
+
+            formData.append('file', file);
+            var a = document.querySelector(".type").value;
+            if (a == '2' && file.name.indexOf('.csv') == -1) {
+                return alert("请使用表格软件转换为csv格式再上传！");
+            }
+            if (JSON.stringify(inputData) != "{}") formData.append('content', JSON.stringify(inputData));
+            console.log(formData);
+
+            let response = await fetch('/' + a, {
+                method: 'POST',
+                body: formData,
+            })
+            let data = await response.json();
+            if (data.status == 200) {
+                // 下载文件
+                let aLink = document.createElement('a');
+                // a.url = '/file'
+                aLink.href = urlPrefix + '/file';
+                aLink.click();
+
+            } else {
+                showLack(data.data);
+            }
+        }
+    </script>
+</body>
+
+</html>
