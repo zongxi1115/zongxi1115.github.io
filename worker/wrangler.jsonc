@@ -1,0 +1,10 @@
+{
+  "name": "zongxi-page-uploader",
+  "main": "worker.js",
+  "compatibility_date": "2026-08-23",
+  "workers_dev": true,
+  "vars": {
+    "GITHUB_OWNER": "zongxi1115",
+    "GITHUB_REPO": "zongxi1115.github.io"
+  }
+}

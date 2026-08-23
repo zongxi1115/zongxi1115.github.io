@@ -1,5 +1,15 @@
 # zongxi1115.github.io
 
+## 在线上传管理页
+
+`worker/` 是 Cloudflare Worker 源码。它在管理员登录后将一个 HTML 文件写入 `pages/`，并更新 `pages/index.html` 的页面目录。部署 Worker 前，必须在 Cloudflare 中设置以下 Secret：
+
+- `GITHUB_TOKEN`：只授予本仓库 `Contents: Read and write` 的 Fine-grained PAT。
+- `ADMIN_PASSWORD`：上传管理页的登录密码。
+- `SESSION_SECRET`：随机长字符串，用于签名登录会话。
+
+不要将以上 Secret 写入仓库、`wrangler.jsonc`、`.env` 或前端代码。
+
 个人 GitHub Pages 站点。
 
 ## 目录约定
