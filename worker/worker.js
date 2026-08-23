@@ -7,7 +7,14 @@ export default {
     if (url.pathname === "/login" && request.method === "POST") return login(request, env);
     if (!(await authenticated(request, env))) return page(loginForm(), 401);
     if (url.pathname === "/" && request.method === "GET") return page(uploadForm());
-    if (url.pathname === "/upload" && request.method === "POST") return upload(request, env);
+    if (url.pathname === "/upload" && request.method === "POST") {
+      try {
+        return await upload(request, env);
+      } catch (error) {
+        console.error(error);
+        return page(`<!doctype html><meta charset="UTF-8"><title>发布失败</title><p>GitHub 拒绝了这次写入。请检查 <code>GITHUB_TOKEN</code> 是否仅限本仓库且拥有 Contents: Read and write 权限。</p><p><a href="/">返回上传管理</a></p>`, 502);
+      }
+    }
     return new Response("Not found", { status: 404 });
   },
 };
