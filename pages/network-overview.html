@@ -1,0 +1,579 @@
+<title>计算机网络全景速通</title>
+<style>
+:root{
+  --bg:#f5f7fa; --surface:#ffffff; --ink:#1c2733; --muted:#5a6b7c;
+  --line:#d9e1e9; --line-soft:#e8edf3; --accent:#0b6bcb; --accent-soft:#e3effb;
+  --code-bg:#eef2f6;
+  --c-app:#b45309; --c-app-bg:#fdf3e3;
+  --c-tr:#15803d;  --c-tr-bg:#e8f6ec;
+  --c-net:#0b6bcb; --c-net-bg:#e3effb;
+  --c-link:#7c3aed;--c-link-bg:#f0eafd;
+  --c-phy:#546374; --c-phy-bg:#eceff3;
+  --warn-bg:#fdf3e3; --warn-line:#e0b25a;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e141b; --surface:#161f29; --ink:#dbe5ef; --muted:#93a5b7;
+    --line:#2b3b4b; --line-soft:#233240; --accent:#5aa7f0; --accent-soft:#173049;
+    --code-bg:#1d2935;
+    --c-app:#e8a04c; --c-app-bg:#33260f;
+    --c-tr:#5ecb85;  --c-tr-bg:#122b1b;
+    --c-net:#5aa7f0; --c-net-bg:#173049;
+    --c-link:#b193f5;--c-link-bg:#261b40;
+    --c-phy:#9fb0c1; --c-phy-bg:#232d38;
+    --warn-bg:#33260f; --warn-line:#8a6a2a;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e141b; --surface:#161f29; --ink:#dbe5ef; --muted:#93a5b7;
+  --line:#2b3b4b; --line-soft:#233240; --accent:#5aa7f0; --accent-soft:#173049;
+  --code-bg:#1d2935;
+  --c-app:#e8a04c; --c-app-bg:#33260f;
+  --c-tr:#5ecb85;  --c-tr-bg:#122b1b;
+  --c-net:#5aa7f0; --c-net-bg:#173049;
+  --c-link:#b193f5;--c-link-bg:#261b40;
+  --c-phy:#9fb0c1; --c-phy-bg:#232d38;
+  --warn-bg:#33260f; --warn-line:#8a6a2a;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:-apple-system,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:15.5px; line-height:1.75;
+}
+code,.mono{font-family:"Cascadia Code",Consolas,"JetBrains Mono",Menlo,monospace;font-size:.92em}
+code{background:var(--code-bg);padding:.1em .35em;border-radius:4px}
+.wrap{max-width:52rem;margin:0 auto;padding:2.5rem 1.25rem 5rem}
+header.doc{border-bottom:2px solid var(--line);padding-bottom:1.5rem;margin-bottom:2rem}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;color:var(--accent);font-weight:600;text-transform:uppercase}
+h1{font-size:2rem;margin:.35rem 0 .5rem;line-height:1.3;text-wrap:balance}
+.sub{color:var(--muted);margin:0;max-width:42rem}
+h2{font-size:1.45rem;margin:3rem 0 .3rem;line-height:1.35;padding-top:1rem;border-top:1px solid var(--line)}
+h2 .no{color:var(--muted);font-weight:500;margin-right:.5rem;font-variant-numeric:tabular-nums}
+h3{font-size:1.12rem;margin:1.8rem 0 .5rem}
+h4{font-size:1rem;margin:1.3rem 0 .3rem}
+p{margin:.5rem 0}
+ul,ol{margin:.4rem 0 .8rem;padding-left:1.4em}
+li{margin:.28rem 0}
+li>ul{margin-top:.15rem}
+strong{font-weight:650}
+.layer-tag{display:inline-block;font-size:.75rem;font-weight:650;padding:.1em .6em;border-radius:99px;vertical-align:.15em;margin-left:.5rem;letter-spacing:.05em}
+.t-app{color:var(--c-app);background:var(--c-app-bg)}
+.t-tr{color:var(--c-tr);background:var(--c-tr-bg)}
+.t-net{color:var(--c-net);background:var(--c-net-bg)}
+.t-link{color:var(--c-link);background:var(--c-link-bg)}
+.t-phy{color:var(--c-phy);background:var(--c-phy-bg)}
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.4rem;margin:1.5rem 0}
+.toc b{display:block;margin-bottom:.4rem;font-size:.85rem;letter-spacing:.1em;color:var(--muted)}
+.toc ol{margin:0;padding-left:1.3em;columns:2;column-gap:2.5rem}
+.toc a{color:var(--ink);text-decoration:none}
+.toc a:hover{color:var(--accent)}
+@media(max-width:640px){.toc ol{columns:1}}
+.box{border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--surface);border-radius:8px;padding:.8rem 1.1rem;margin:1rem 0}
+.box.memo{border-left-color:var(--warn-line);background:var(--warn-bg)}
+.box .cap{font-size:.78rem;font-weight:700;letter-spacing:.12em;color:var(--muted);display:block;margin-bottom:.25rem}
+.tblwrap{overflow-x:auto;margin:1rem 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:520px}
+th,td{padding:.5rem .8rem;border-bottom:1px solid var(--line-soft);text-align:left;vertical-align:top}
+th{background:var(--code-bg);font-weight:650;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td b{white-space:nowrap}
+.num{font-variant-numeric:tabular-nums}
+.hdr{display:grid;gap:2px;margin:1rem 0;font-size:.8rem;line-height:1.4}
+.hdr .f{background:var(--accent-soft);border:1px solid var(--line);border-radius:4px;padding:.3rem .4rem;text-align:center}
+.hdr .f small{display:block;color:var(--muted);font-size:.72rem}
+.hdr .f.opt{background:var(--code-bg)}
+.hdr .f.pay{background:var(--surface);border-style:dashed}
+.hdrwrap{overflow-x:auto}
+.hdrwrap .hdr{min-width:560px}
+.encap{margin:1.2rem 0;overflow-x:auto}
+.encap .row{display:flex;align-items:center;gap:.5rem;margin:.35rem 0;min-width:560px}
+.encap .lbl{flex:0 0 9.5rem;font-size:.85rem;font-weight:650;text-align:right}
+.encap .cell{border:1.5px solid;border-radius:5px;padding:.25rem .6rem;font-size:.82rem;text-align:center;white-space:nowrap}
+.flow{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:.6rem 0;font-size:.9rem}
+.flow .st{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:.2rem .6rem}
+.flow .ar{color:var(--muted)}
+footer{margin-top:4rem;border-top:1px solid var(--line);padding-top:1rem;color:var(--muted);font-size:.85rem}
+</style>
+
+<div class="wrap">
+<header class="doc">
+  <div class="eyebrow">Computer Networking · 考前全景</div>
+  <h1>计算机网络全景速通:自顶向下的一条主线</h1>
+  <p class="sub">按「应用层 → 传输层 → 网络层 → 链路层 → 物理层」的顺序讲透每层解决什么问题、用什么机制解决,再用一次完整的 Web 请求把五层串成一条线。以 Kurose《自顶向下方法》体系为骨架,兼容国内教材(谢希仁)的考点表述。</p>
+</header>
+
+<nav class="toc">
+<b>目录</b>
+<ol start="0">
+  <li><a href="#s0">全局视角:交换方式、性能指标、分层与封装</a></li>
+  <li><a href="#s1">应用层:HTTP、DNS、邮件、CDN</a></li>
+  <li><a href="#s2">传输层:UDP、可靠传输原理、TCP、拥塞控制</a></li>
+  <li><a href="#s3">网络层:IP、子网、NAT、路由算法与协议</a></li>
+  <li><a href="#s4">链路层:差错检测、多路访问、以太网、交换机</a></li>
+  <li><a href="#s5">物理层:两个信道容量公式与传输介质</a></li>
+  <li><a href="#s6">无线网络:802.11 要点</a></li>
+  <li><a href="#s7">网络安全:加密体系与 TLS</a></li>
+  <li><a href="#s8">全链路串讲:从输入 URL 到页面渲染</a></li>
+  <li><a href="#s9">考前速查:数字表、对比表、计算题型</a></li>
+</ol>
+</nav>
+
+<h2 id="s0"><span class="no">0</span>全局视角:先看清整张网</h2>
+
+<p>整个计算机网络只回答一个问题:<strong>两台不直接相连的主机上的两个进程,如何可靠、高效地交换数据。</strong>这个问题太大,于是被垂直切成五层,每层解决一个子问题、并只依赖下一层提供的服务:</p>
+
+<div class="tblwrap"><table>
+<tr><th>层</th><th>解决的核心问题</th><th>传输单位</th><th>典型协议/设备</th><th>寻址</th></tr>
+<tr><td><b>应用层</b><span class="layer-tag t-app">App</span></td><td>进程之间按什么格式、什么规则对话</td><td>报文 message</td><td>HTTP、DNS、SMTP</td><td>域名 / URL</td></tr>
+<tr><td><b>传输层</b><span class="layer-tag t-tr">Transport</span></td><td>把「主机到主机」提升为「进程到进程」,并可选地提供可靠性</td><td>报文段 segment</td><td>TCP、UDP</td><td>端口号</td></tr>
+<tr><td><b>网络层</b><span class="layer-tag t-net">Network</span></td><td>跨越多个网络,把分组从源主机送到目的主机(选路 + 转发)</td><td>数据报 datagram</td><td>IP、ICMP;路由器</td><td>IP 地址</td></tr>
+<tr><td><b>链路层</b><span class="layer-tag t-link">Link</span></td><td>在一段直接相连的链路/局域网内把帧交给相邻结点</td><td>帧 frame</td><td>以太网、Wi‑Fi、ARP;交换机</td><td>MAC 地址</td></tr>
+<tr><td><b>物理层</b><span class="layer-tag t-phy">Physical</span></td><td>把比特变成电/光/电磁信号在介质上传输</td><td>比特 bit</td><td>双绞线、光纤;集线器</td><td>—</td></tr>
+</table></div>
+
+<p>记住这条<strong>寻址链</strong>,它就是全书的主线:<strong>域名 →(DNS)→ IP 地址 + 端口号 →(路由)→ 每一跳的下一站 IP →(ARP)→ MAC 地址 →(链路)→ 比特流</strong>。上层地址逐级翻译为下层地址,数据逐级封装。</p>
+
+<h3>0.1 电路交换 vs 分组交换</h3>
+<ul>
+<li><strong>电路交换</strong>(电话网):通信前先建立端到端专用通路,预留固定带宽(FDM 频分 / TDM 时分)。优点是时延确定、无排队;缺点是空闲时段带宽浪费、建立连接慢。</li>
+<li><strong>分组交换</strong>(互联网):数据切成分组,每个分组带目的地址,路由器<strong>存储—转发</strong>,按需共享链路(统计复用)。优点是链路利用率高、容错好;代价是<strong>排队时延和丢包</strong>——路由器缓存有限,突发流量超过输出链路速率时分组排队,队满则丢弃。</li>
+<li>互联网选择分组交换,因为数据业务是突发的:大多数用户大多数时间不发数据,统计复用能让远多于「带宽÷人均速率」的用户共享同一条链路。</li>
+</ul>
+
+<h3>0.2 四种时延 + 两个性能指标(必考计算)</h3>
+<p>一个分组经过一台路由器的总时延 = <strong>处理时延 + 排队时延 + 传输时延 + 传播时延</strong>:</p>
+<ul>
+<li><strong>处理时延</strong>:检查首部、查表决定出口,微秒级,通常忽略。</li>
+<li><strong>排队时延</strong>:在输出队列等待,取决于拥塞程度,是唯一不确定的一项。流量强度 <code>La/R</code>(a 为分组到达率,L 为分组长度,R 为链路速率)趋近 1 时排队时延急剧增大,大于 1 则队列无限增长。</li>
+<li><strong>传输时延</strong> = <code>L / R</code>:把整个分组的比特「推上链路」所需时间,取决于<strong>分组长度和链路带宽</strong>,与距离无关。</li>
+<li><strong>传播时延</strong> = <code>d / s</code>:信号跑完链路长度 d 所需时间(s ≈ 2×10⁸ m/s,铜线光纤都按此量级),取决于<strong>距离</strong>,与分组长度无关。</li>
+</ul>
+<div class="box memo"><span class="cap">易混警告</span>
+传输时延和传播时延是最经典的混淆点:传输时延是「上车时间」(与 L、R 有关),传播时延是「行车时间」(与 d 有关)。存储—转发意味着每一跳都要重新付一次传输时延:经过 N 段速率为 R 的链路发送一个分组,总时延 = <code>N·L/R</code>(忽略传播与排队)。</div>
+<ul>
+<li><strong>吞吐量</strong>:端到端路径的实际数据传输速率,受制于路径上的<strong>瓶颈链路</strong>(min 各段速率)。传输 F 比特文件的时间 ≈ F / 瓶颈速率。</li>
+<li><strong>时延带宽积</strong> = 传播时延 × 带宽,表示链路上「正在飞行」的比特数,是理解滑动窗口大小的关键。</li>
+</ul>
+
+<h3>0.3 分层与封装</h3>
+<p>发送时数据自顶向下逐层加首部(链路层还加尾部),接收时逐层剥掉。各层数据单元的嵌套关系:</p>
+<div class="encap">
+<div class="row"><div class="lbl" style="color:var(--c-app)">应用层 报文</div><div class="cell" style="border-color:var(--c-app);background:var(--c-app-bg)">应用数据(如 HTTP 报文)</div></div>
+<div class="row"><div class="lbl" style="color:var(--c-tr)">传输层 报文段</div><div class="cell" style="border-color:var(--c-tr);background:var(--c-tr-bg)">TCP/UDP 首部</div><div class="cell" style="border-color:var(--c-app);background:var(--c-app-bg)">应用数据</div></div>
+<div class="row"><div class="lbl" style="color:var(--c-net)">网络层 数据报</div><div class="cell" style="border-color:var(--c-net);background:var(--c-net-bg)">IP 首部</div><div class="cell" style="border-color:var(--c-tr);background:var(--c-tr-bg)">TCP/UDP 首部</div><div class="cell" style="border-color:var(--c-app);background:var(--c-app-bg)">应用数据</div></div>
+<div class="row"><div class="lbl" style="color:var(--c-link)">链路层 帧</div><div class="cell" style="border-color:var(--c-link);background:var(--c-link-bg)">帧首部</div><div class="cell" style="border-color:var(--c-net);background:var(--c-net-bg)">IP 首部</div><div class="cell" style="border-color:var(--c-tr);background:var(--c-tr-bg)">TCP/UDP 首部</div><div class="cell" style="border-color:var(--c-app);background:var(--c-app-bg)">应用数据</div><div class="cell" style="border-color:var(--c-link);background:var(--c-link-bg)">帧尾 FCS</div></div>
+</div>
+<ul>
+<li><strong>各设备处理到哪一层</strong>:集线器/中继器只到物理层;交换机到链路层(看 MAC);路由器到网络层(看 IP);主机五层全有。这直接决定了「路由器转发时改哪些字段」这类考题的答案。</li>
+<li>OSI 七层(应用/表示/会话/传输/网络/链路/物理)是理论模型,TCP/IP 四层(应用/传输/网际/网络接口)是工程现实,教学用五层折中。考试问「XX 协议属于哪层」按五层答。</li>
+</ul>
+
+<h2 id="s1"><span class="no">1</span>应用层:进程如何对话<span class="layer-tag t-app">Application</span></h2>
+
+<p>应用层协议规定报文的类型、语法、字段语义和收发时序。它运行在端系统上,把下面所有层当作一条「进程到进程的管道」使用——这个管道的接口就是<strong>套接字 socket</strong>。应用层要做的第一个决定是选传输服务:要可靠字节流选 TCP,要低时延、能容忍丢包选 UDP。</p>
+
+<h3>1.1 两种应用架构</h3>
+<ul>
+<li><strong>客户—服务器 C/S</strong>:服务器常开、有固定 IP,客户主动发起请求,客户之间不直接通信。扩展靠数据中心堆机器。</li>
+<li><strong>P2P</strong>:对等方之间直接通信,每个结点既是客户又是服务器,具有<strong>自扩展性</strong>——新用户带来需求也带来上传能力。典型:BitTorrent(最稀缺优先下载、对上传贡献大的邻居优先回报)。分发 F 比特文件给 N 个用户,C/S 时间随 N 线性增长,P2P 时间趋于常数级,这是经典分析题。</li>
+</ul>
+
+<h3>1.2 HTTP:Web 的应用层协议</h3>
+<ul>
+<li>基于 <strong>TCP,端口 80</strong>(HTTPS 443)。协议本身<strong>无状态</strong>:服务器不保存历史请求信息;状态由 <strong>Cookie</strong> 补上——服务器用 <code>Set-Cookie</code> 发标识,浏览器此后每次请求带 <code>Cookie</code> 头,服务器据此在后端数据库关联用户。</li>
+<li><strong>非持续 vs 持续连接</strong>:HTTP/1.0 每个对象新建一次 TCP 连接,取一个对象耗时 ≈ 2 RTT + 传输时间(1 RTT 握手 + 1 RTT 请求响应);HTTP/1.1 默认<strong>持续连接</strong>,多个对象复用同一 TCP 连接,可流水线发送请求。</li>
+<li><strong>HTTP/2</strong>:同一 TCP 连接内多路复用多个流、帧交错发送,解决 1.1 的队首阻塞(HTTP 层),支持服务器推送、首部压缩。但 TCP 层丢包仍会阻塞所有流,于是 <strong>HTTP/3 改用基于 UDP 的 QUIC</strong>,把可靠传输、加密、多路复用做到用户态,流之间互不阻塞。</li>
+<li><strong>报文格式</strong>:请求 = 请求行(方法 URL 版本)+ 首部行 + 空行 + 实体体;响应 = 状态行(版本 状态码 短语)+ 首部行 + 空行 + 实体体。首部是纯文本、以 CRLF 分行。</li>
+<li><strong>方法</strong>:GET(获取,参数在 URL)、POST(提交,数据在实体体)、HEAD(只要响应首部)、PUT(上传/整体替换)、DELETE。</li>
+</ul>
+<div class="tblwrap"><table>
+<tr><th>状态码</th><th>含义</th><th>说明</th></tr>
+<tr><td class="num"><b>200 OK</b></td><td>成功</td><td>请求对象在响应体中</td></tr>
+<tr><td class="num"><b>301 Moved Permanently</b></td><td>永久重定向</td><td>新 URL 在 <code>Location</code> 首部,浏览器自动重发</td></tr>
+<tr><td class="num"><b>304 Not Modified</b></td><td>未修改</td><td>配合条件 GET,让缓存继续用本地副本</td></tr>
+<tr><td class="num"><b>400 Bad Request</b></td><td>请求语法错误</td><td>服务器看不懂</td></tr>
+<tr><td class="num"><b>404 Not Found</b></td><td>对象不存在</td><td>路径错误</td></tr>
+<tr><td class="num"><b>500 / 503</b></td><td>服务器内部错误 / 过载不可用</td><td>服务端问题</td></tr>
+</table></div>
+<ul>
+<li><strong>Web 缓存(代理服务器)</strong>:既当服务器(对浏览器)又当客户(对源站),命中则直接返回,显著降低响应时间和机构接入链路流量。用<strong>条件 GET</strong> 保证新鲜:缓存转发请求时带 <code>If-Modified-Since</code>,对象没变则源站回 <code>304</code> 空体,变了才回 <code>200</code> + 新对象。</li>
+</ul>
+
+<h3>1.3 DNS:域名系统</h3>
+<p>DNS 是「用应用层协议实现的核心基础设施」:把域名翻译成 IP,同时提供主机别名、邮件服务器别名、负载均衡。运行在 <strong>UDP 端口 53</strong>(响应超长或区域传送用 TCP)。</p>
+<ul>
+<li><strong>层次结构</strong>:根服务器(13 组)→ 顶级域 TLD 服务器(.com、.cn)→ 权威服务器(存放具体域的记录)。另有不在层次里的<strong>本地 DNS 服务器</strong>,由 ISP/校园网提供,是主机的直接代理。</li>
+<li><strong>查询过程</strong>(标准考题):主机 → 本地 DNS 为<strong>递归查询</strong>(全权代办);本地 DNS → 根 → TLD → 权威通常为<strong>迭代查询</strong>(每问一级,对方只告诉「下一个该问谁」)。结果沿途<strong>缓存</strong>(按 TTL 过期),所以绝大多数查询根本到不了根服务器。</li>
+<li><strong>资源记录 RR</strong> = (Name, Value, Type, TTL):</li>
+</ul>
+<div class="tblwrap"><table>
+<tr><th>类型</th><th>Name → Value</th><th>用途</th></tr>
+<tr><td><b>A / AAAA</b></td><td>主机名 → IPv4 / IPv6 地址</td><td>最基本的解析</td></tr>
+<tr><td><b>NS</b></td><td>域 → 该域权威服务器的主机名</td><td>沿层次向下引路</td></tr>
+<tr><td><b>CNAME</b></td><td>别名 → 规范主机名</td><td>一个站点多个名字</td></tr>
+<tr><td><b>MX</b></td><td>域 → 邮件服务器规范名</td><td>投递邮件前查询</td></tr>
+</table></div>
+
+<h3>1.4 电子邮件</h3>
+<ul>
+<li>三个组成:用户代理、邮件服务器、协议。发送方向:用户代理 →(SMTP)→ 发方服务器 →(SMTP)→ 收方服务器;拉取方向:收方用户代理用 <strong>POP3(110)或 IMAP(143)</strong> 从自己的服务器取信,或直接用 Web 界面(HTTP)。</li>
+<li><strong>SMTP,TCP 端口 25</strong>:<strong>推协议</strong>(连接由发送方发起),只传 7 位 ASCII,二进制附件靠 MIME 编码(Base64)。与 HTTP 对比:HTTP 是拉协议、每个对象独立封装;SMTP 是推协议、多个对象合成一个报文。</li>
+<li>POP3 简单、邮件状态只在本地;IMAP 在服务器端保存文件夹状态,多设备同步,是现代默认。</li>
+</ul>
+
+<h3>1.5 视频流与 CDN</h3>
+<ul>
+<li><strong>DASH</strong>(基于 HTTP 的动态自适应流):视频编码成多个码率版本、切成小块,客户端按当前测得带宽逐块选择码率请求——智能在客户端。</li>
+<li><strong>CDN</strong>:把内容副本部署到全球边缘节点,用户请求被 DNS 重定向到「最近」的副本服务器(权威 DNS 返回 CNAME 指向 CDN,CDN 的 DNS 根据本地 DNS 的位置选节点)。解决单源站的距离时延、单点故障与出口带宽瓶颈。</li>
+</ul>
+
+<div class="box"><span class="cap">本层小结</span>
+应用层输出一段<strong>报文</strong>和一个目标 <code>IP:端口</code>(IP 由 DNS 得到),通过 socket 交给传输层。它对「报文如何可靠到达」一无所知——这正是下一层的工作。</div>
+
+<h2 id="s2"><span class="no">2</span>传输层:进程到进程,以及可靠性<span class="layer-tag t-tr">Transport</span></h2>
+
+<p>网络层只负责「主机到主机」的尽力而为交付——会丢包、会乱序、不保证时延。传输层在此之上做两件事:<strong>① 复用/分用</strong>,用端口号把数据送到正确的进程;<strong>② 可选地把不可靠信道升级为可靠信道</strong>(TCP)。</p>
+
+<h3>2.1 复用与分用</h3>
+<ul>
+<li><strong>UDP 分用</strong>用二元组(目的 IP,目的端口)定位 socket;<strong>TCP 分用</strong>用四元组(源 IP,源端口,目的 IP,目的端口)——所以同一服务器端口 80 可以同时服务大量连接,每条连接各有 socket。</li>
+<li>周知端口 0–1023,注册端口 1024–49151,客户端临时端口通常取 49152–65535。</li>
+</ul>
+
+<h3>2.2 UDP:几乎裸的 IP</h3>
+<ul>
+<li>只做分用 + 差错检测。<strong>无连接、无握手、不保证交付与顺序、无拥塞控制</strong>。首部仅 <strong>8 字节</strong>:源端口、目的端口、长度、校验和(各 2 字节)。</li>
+<li>校验和:把伪首部 + 首部 + 数据按 16 位字反码求和再取反;接收方全加起来应为全 1。能检错,不能纠错。</li>
+<li>选 UDP 的理由:无建连时延(DNS)、无连接状态服务器可支撑更多客户、首部开销小、发送速率完全由应用控制(实时音视频宁丢不等)。QUIC 则证明可以在 UDP 上重建可靠性。</li>
+</ul>
+
+<h3>2.3 可靠数据传输原理(rdt):从停等到滑动窗口</h3>
+<p>这是传输层的理论核心,考试爱考。问题:信道会<strong>出错</strong>和<strong>丢包</strong>,如何在其上实现可靠传输?机制逐步叠加:</p>
+<ul>
+<li><strong>应对比特错</strong>:校验和检错 + 接收方反馈 <strong>ACK/NAK</strong> + 出错重传(ARQ)。ACK 本身也可能坏 → 引入<strong>序号</strong>让接收方识别重复分组(停等只需 0/1 交替)。</li>
+<li><strong>应对丢包</strong>:发送方设<strong>倒计时定时器</strong>,超时重传。重复分组由序号去重,所以重传永远是安全的。</li>
+<li><strong>停等协议的致命伤是利用率</strong>:U = <code>(L/R) / (RTT + L/R)</code>。长肥链路上(RTT 大)利用率极低 → 引入<strong>流水线</strong>:不等确认连续发送多个分组,需要更大的序号空间和缓存,由「窗口」管理。</li>
+</ul>
+<div class="tblwrap"><table>
+<tr><th></th><th>回退 N 步 GBN</th><th>选择重传 SR</th></tr>
+<tr><td><b>发送窗口</b></td><td>≤ 2ᵏ − 1(k 为序号位数)</td><td>≤ 2ᵏ⁻¹</td></tr>
+<tr><td><b>接收窗口</b></td><td>1(只按序收)</td><td>与发送窗口同,可缓存失序分组</td></tr>
+<tr><td><b>确认方式</b></td><td>累积确认:ACK n 表示 ≤ n 全部收到</td><td>逐个确认</td></tr>
+<tr><td><b>超时重传</b></td><td>重传窗口内<strong>全部</strong>未确认分组(一个定时器)</td><td>只重传超时的<strong>那一个</strong>(每分组一个定时器)</td></tr>
+<tr><td><b>失序分组</b></td><td>丢弃,重发最近按序 ACK</td><td>缓存,补齐后一起上交</td></tr>
+</table></div>
+<div class="box memo"><span class="cap">窗口上限为什么不同</span>
+GBN 若窗口 = 2ᵏ,接收方无法区分「全部 ACK 丢失后的重传 0 号」与「新一轮的 0 号」;SR 因接收窗口也很大,新旧窗口的序号不能有任何重叠,故上限减半为 2ᵏ⁻¹。</div>
+
+<h3>2.4 TCP:面向连接的可靠字节流</h3>
+<p>TCP 提供<strong>点对点、全双工、面向连接的可靠字节流</strong>——「字节流」意味着 TCP 不保留应用报文边界,序号编在<strong>字节</strong>上而不是报文段上。它综合了 GBN 与 SR:累积确认像 GBN,但接收方一般缓存失序段、且只重传疑似丢失的那个段,像 SR。</p>
+<div class="hdrwrap"><div class="hdr" style="grid-template-columns:repeat(32,1fr)">
+<div class="f" style="grid-column:span 16">源端口 <small>16 位</small></div>
+<div class="f" style="grid-column:span 16">目的端口 <small>16 位</small></div>
+<div class="f" style="grid-column:span 32">序号 seq <small>本段第一个数据字节的编号,32 位</small></div>
+<div class="f" style="grid-column:span 32">确认号 ack <small>期望收到的下一个字节编号(累积确认),32 位</small></div>
+<div class="f" style="grid-column:span 4">首部长度</div>
+<div class="f" style="grid-column:span 6">保留</div>
+<div class="f" style="grid-column:span 6">标志 <small>SYN ACK FIN RST…</small></div>
+<div class="f" style="grid-column:span 16">接收窗口 rwnd <small>流量控制</small></div>
+<div class="f" style="grid-column:span 16">校验和</div>
+<div class="f" style="grid-column:span 16">紧急指针</div>
+<div class="f opt" style="grid-column:span 32">选项(可变,如 MSS、窗口扩大、SACK、时间戳)</div>
+<div class="f pay" style="grid-column:span 32">数据</div>
+</div></div>
+<p>首部 <strong>20 字节固定 + 选项,最长 60 字节</strong>。MSS(最大报文段长)指数据部分上限,典型 1460 = 以太网 MTU 1500 − IP 首部 20 − TCP 首部 20。</p>
+
+<h4>连接建立:三次握手</h4>
+<div class="flow">
+<span class="st">客户 → 服务器:SYN, seq = x</span><span class="ar">→</span>
+<span class="st">服务器 → 客户:SYN + ACK, seq = y, ack = x+1</span><span class="ar">→</span>
+<span class="st">客户 → 服务器:ACK, seq = x+1, ack = y+1(可携带数据)</span>
+</div>
+<ul>
+<li>SYN 和 FIN 各消耗一个序号;初始序号随机以防旧连接的报文串扰。</li>
+<li><strong>为什么是三次而不是两次</strong>:两次握手时,网络中滞留的旧 SYN 到达服务器会被当作新连接请求,服务器单方面建立连接并空等,造成资源浪费;第三次 ACK 让服务器确认客户方确实在场且双方序号同步。</li>
+<li>SYN 洪泛攻击利用半连接队列耗尽服务器资源,防御用 SYN cookie(服务器不保存状态,把状态编码进 y)。</li>
+</ul>
+
+<h4>连接释放:四次挥手</h4>
+<div class="flow">
+<span class="st">主动方:FIN</span><span class="ar">→</span>
+<span class="st">被动方:ACK</span><span class="ar">→</span>
+<span class="st">被动方(数据发完后):FIN</span><span class="ar">→</span>
+<span class="st">主动方:ACK,进入 TIME_WAIT</span>
+</div>
+<ul>
+<li>之所以四次:关闭是双向独立的,被动方收到 FIN 后可能还有数据要发,ACK 与它自己的 FIN 不能合并(除非恰好无数据,可合并成三次)。</li>
+<li><strong>TIME_WAIT 等待 2MSL</strong>(报文最大生存时间的两倍)的原因:① 确保最后一个 ACK 若丢失,还能应答对方重传的 FIN;② 让本连接的所有旧报文在网络中死光,防止污染下一个相同四元组的连接。</li>
+</ul>
+
+<h4>超时与重传</h4>
+<ul>
+<li>RTT 估计(指数加权移动平均):<code>EstimatedRTT = 0.875·EstimatedRTT + 0.125·SampleRTT</code>;偏差 <code>DevRTT = 0.75·DevRTT + 0.25·|Sample − Estimated|</code>;<strong><code>TimeoutInterval = EstimatedRTT + 4·DevRTT</code></strong>。每次超时后间隔加倍(指数退避)。重传的段不采样 RTT(Karn 算法),避免二义性。</li>
+<li><strong>快重传</strong>:收到 <strong>3 个冗余 ACK</strong>(同一确认号第 4 次出现)即判定该段丢失,不等超时立刻重传。</li>
+<li>接收方采用延迟 ACK:收到按序段等 500 ms 内若有第二个段则发一个累积 ACK;收到失序段立即发冗余 ACK。</li>
+</ul>
+
+<h4>流量控制 vs 拥塞控制</h4>
+<ul>
+<li><strong>流量控制</strong>防止压垮<strong>接收方</strong>:接收方在首部 rwnd 字段通告剩余缓存,发送方保证未确认字节数 ≤ rwnd。rwnd = 0 时发送方仍发 1 字节探测段,避免死锁。</li>
+<li><strong>拥塞控制</strong>防止压垮<strong>网络</strong>:维护拥塞窗口 cwnd,实际发送窗口 = <strong>min(cwnd, rwnd)</strong>。网络不会明确报告拥塞,TCP 把<strong>丢包(超时或 3 冗余 ACK)当作拥塞信号</strong>。</li>
+</ul>
+
+<h4>拥塞控制算法(Reno,必考)</h4>
+<ul>
+<li><strong>慢启动</strong>:cwnd 从 1 MSS 起,每收到一个 ACK 加 1 MSS —— 每 RTT <strong>翻倍</strong>(指数增长),直到达到阈值 ssthresh 转入拥塞避免。</li>
+<li><strong>拥塞避免</strong>:每 RTT cwnd 加 1 MSS(线性增长,加性增 AI)。</li>
+<li><strong>超时丢包</strong>(严重拥塞):<code>ssthresh = cwnd/2</code>,<code>cwnd = 1</code>,重新慢启动。</li>
+<li><strong>3 冗余 ACK</strong>(轻度拥塞,网络还能送达包):快重传 + <strong>快恢复</strong>:<code>ssthresh = cwnd/2</code>,<code>cwnd = ssthresh</code>,直接进入拥塞避免(乘性减 MD)。</li>
+<li>整体形成 <strong>AIMD</strong> 锯齿:加性增探测带宽,乘性减快速让出带宽。AIMD 使共享瓶颈的多条连接<strong>收敛到公平分享</strong>。现代变体:CUBIC(Linux 默认,窗口按三次函数增长)、BBR(基于测量带宽与 RTT,不依赖丢包信号)。</li>
+</ul>
+<div class="box memo"><span class="cap">画图题模板</span>
+横轴 RTT、纵轴 cwnd:指数爬升(慢启动)→ 到 ssthresh 改直线(拥塞避免)→ 超时则跌回 1 重来 / 3 冗余 ACK 则腰斩后继续直线。给定初始 cwnd、ssthresh 和丢包时刻,逐 RTT 写出 cwnd 序列即可。</div>
+
+<div class="box"><span class="cap">本层小结</span>
+传输层把应用报文切成段、编上字节序号、附上端口,交给网络层的只是一个个独立的段。它假设网络层能把段送到对端主机——至于怎么穿过几十个路由器,是网络层的事。</div>
+
+<h2 id="s3"><span class="no">3</span>网络层:把数据报送到目的主机<span class="layer-tag t-net">Network</span></h2>
+
+<p>网络层是唯一「每台路由器都参与」的一层,分成两个平面:<strong>数据平面</strong>(转发 forwarding:单台路由器查表把分组从输入端口移到输出端口,纳秒级、硬件实现)和<strong>控制平面</strong>(路由 routing:全网协作算出转发表,秒级、软件实现)。IP 提供的服务模型是<strong>尽力而为</strong>:不保证交付、不保证顺序、不保证时延。</p>
+
+<h3>3.1 IPv4 数据报</h3>
+<div class="hdrwrap"><div class="hdr" style="grid-template-columns:repeat(32,1fr)">
+<div class="f" style="grid-column:span 4">版本</div>
+<div class="f" style="grid-column:span 4">首部长度</div>
+<div class="f" style="grid-column:span 8">区分服务</div>
+<div class="f" style="grid-column:span 16">总长度 <small>首部+数据,字节</small></div>
+<div class="f" style="grid-column:span 16">标识 <small>同一原始报文的分片同值</small></div>
+<div class="f" style="grid-column:span 3">标志 <small>DF·MF</small></div>
+<div class="f" style="grid-column:span 13">片偏移 <small>×8 字节</small></div>
+<div class="f" style="grid-column:span 8">TTL <small>每跳减 1,为 0 丢弃</small></div>
+<div class="f" style="grid-column:span 8">协议 <small>6=TCP 17=UDP 1=ICMP</small></div>
+<div class="f" style="grid-column:span 16">首部校验和 <small>只校验首部,每跳重算</small></div>
+<div class="f" style="grid-column:span 32">源 IP 地址 <small>32 位</small></div>
+<div class="f" style="grid-column:span 32">目的 IP 地址 <small>32 位</small></div>
+<div class="f opt" style="grid-column:span 32">选项(可变)</div>
+<div class="f pay" style="grid-column:span 32">数据(TCP/UDP 段)</div>
+</div></div>
+<ul>
+<li>首部 <strong>20 字节固定,最长 60</strong>。TTL 防止分组在路由环路中永久打转,也被 traceroute 巧妙利用。</li>
+<li><strong>分片</strong>:链路 MTU(以太网 1500 字节)装不下就切片,<strong>只在目的主机重组</strong>。分片题三要素:同一「标识」;MF = 1 表示后面还有片(最后一片 MF = 0);片偏移以 <strong>8 字节</strong>为单位计数据部分的位置,每片自带 20 字节 IP 首部。IPv6 取消了路由器分片,超长包直接丢弃并回 ICMP 报错,由源端做路径 MTU 发现。</li>
+</ul>
+
+<h3>3.2 IPv4 编址与子网划分(最高频计算题)</h3>
+<ul>
+<li>IP 地址 32 位 = <strong>网络前缀 + 主机号</strong>,记法 <code>a.b.c.d/x</code>(CIDR,前缀长度 x 任意,取代了僵硬的 A/B/C 分类)。子网掩码即前 x 位为 1 的 32 位数。</li>
+<li>子网内计算:主机号<strong>全 0 是网络地址、全 1 是广播地址</strong>,可用主机数 = 2<sup>(32−x)</sup> − 2。例:<code>192.168.10.0/26</code> → 块大小 64,范围 .0–.63,可用 .1–.62,广播 .63。</li>
+<li><strong>路由聚合</strong>:多个连续前缀合并成更短前缀对外通告(如 8 个 /24 聚合为一个 /21),缩小路由表。转发查表用<strong>最长前缀匹配</strong>:多条路由都匹配时选前缀最长(最具体)的那条。</li>
+<li>特殊地址:私有地址 <code>10/8、172.16/12、192.168/16</code>(不可在公网路由,需 NAT);环回 <code>127.0.0.1</code>;本网广播 <code>255.255.255.255</code>;DHCP 未获址时源地址用 <code>0.0.0.0</code>。</li>
+</ul>
+
+<h3>3.3 主机怎么拿到地址:DHCP</h3>
+<ul>
+<li>即插即用的应用层协议,跑在 <strong>UDP,服务器 67 / 客户 68</strong>。四步(DORA):<strong>Discover</strong>(广播找服务器)→ <strong>Offer</strong>(服务器提供候选 IP)→ <strong>Request</strong>(客户广播选定)→ <strong>ACK</strong>(确认,附租期)。</li>
+<li>一次性发给主机四样东西:<strong>自己的 IP、子网掩码、默认网关(第一跳路由器)IP、本地 DNS 服务器 IP</strong>——这正是主机上网的全部初始配置。</li>
+</ul>
+
+<h3>3.4 NAT 与 ICMP</h3>
+<ul>
+<li><strong>NAT</strong>:出方向把(私有 IP, 源端口)改写为(公网 IP, 新端口)并记入转换表,入方向反查改回。让一个公网 IP 背后挂整个内网,是 IPv4 地址枯竭的续命术。争议:改写端口号越层操作了传输层字段,破坏端到端原则,外部无法主动连入内网主机(P2P 需打洞/中继)。</li>
+<li><strong>ICMP</strong>:封装在 IP 数据报内的「网络层差错与查询信使」。常考类型:回显请求/应答(8/0,<strong>ping</strong> 用)、目的不可达(3,含端口不可达)、<strong>TTL 超时(11)</strong>。<strong>traceroute 原理</strong>:依次发 TTL=1,2,3… 的探测包,每台路由器在 TTL 减到 0 时回「超时」ICMP,其源地址即第 n 跳路由器;到达目的主机时因端口不可达返回类型 3,探测结束。</li>
+</ul>
+
+<h3>3.5 IPv6</h3>
+<ul>
+<li>地址 <strong>128 位</strong>,冒号十六进制记法。首部<strong>定长 40 字节</strong>,删掉了校验和(交给传输层与链路层)、分片字段和选项(移入扩展首部),路由器处理更快;新增流标签。</li>
+<li>过渡技术:<strong>双栈</strong>(同时跑 v4/v6)、<strong>隧道</strong>(v6 报文整个装进 v4 报文穿越 v4 网络)、NAT64 转换。</li>
+</ul>
+
+<h3>3.6 路由算法:控制平面的理论</h3>
+<div class="tblwrap"><table>
+<tr><th></th><th>链路状态 LS(Dijkstra)</th><th>距离向量 DV(Bellman-Ford)</th></tr>
+<tr><td><b>信息范围</b></td><td>全局:洪泛链路状态分组,每台路由器掌握全网拓扑</td><td>分布式:只知邻居,与邻居交换距离向量</td></tr>
+<tr><td><b>计算方式</b></td><td>每台路由器独立跑 Dijkstra 求单源最短路径树</td><td>迭代:D<sub>x</sub>(y) = min<sub>v</sub>{c(x,v) + D<sub>v</sub>(y)},收到新向量或链路变价就重算并通告</td></tr>
+<tr><td><b>收敛</b></td><td>快,O(n²) 或堆优化</td><td>慢;好消息传得快、<strong>坏消息传得慢</strong>(计数到无穷问题),缓解:毒性逆转(告诉「我经你到 y」的那个邻居距离为 ∞)</td></tr>
+<tr><td><b>代表协议</b></td><td>OSPF</td><td>RIP(跳数度量,上限 15)</td></tr>
+</table></div>
+
+<h3>3.7 层次路由:AS 内与 AS 间</h3>
+<p>互联网按<strong>自治系统 AS</strong>组织(一个 ISP/机构一个 AS),路由分两级——规模和管理自治都要求这么做:</p>
+<ul>
+<li><strong>AS 内(IGP)—— OSPF</strong>:链路状态协议,管理员配置链路权值,支持划分区域(area)进一步分层,直接封装在 IP 上。目标是<strong>性能最优</strong>。</li>
+<li><strong>AS 间 —— BGP</strong>:事实上的互联网粘合剂。<strong>路径向量</strong>协议,通告「前缀 + AS 路径 + 下一跳」等属性,AS 路径可检测环路;跑在 <strong>TCP 179</strong> 上,分 eBGP(跨 AS 学路由)与 iBGP(在 AS 内部传播)。选路<strong>策略优先于性能</strong>:本地偏好值最高者胜 → AS 路径最短 → 热土豆路由(选最快离开本 AS 的出口)。商业关系(客户/提供商/对等)决定通告策略,例如不为两个提供商免费转接流量。</li>
+<li><strong>SDN</strong>:把控制平面从路由器抽出集中到控制器,交换机只按控制器下发的「匹配 + 动作」流表转发(OpenFlow),使路由、防火墙、负载均衡都成为可编程软件。</li>
+</ul>
+
+<div class="box"><span class="cap">本层小结</span>
+网络层把段装进数据报,靠路由协议算好的转发表逐跳接力,把数据报送到<strong>目的主机</strong>。但「下一跳」在物理上如何到达——同一局域网里怎么把帧精确递给邻居——是链路层的事。</div>
+
+<h2 id="s4"><span class="no">4</span>链路层:一段链路内的交付<span class="layer-tag t-link">Link</span></h2>
+
+<p>链路层负责把数据报封装成帧,在<strong>一段链路或一个局域网内</strong>从一个结点递到相邻结点。它主要在网卡(适配器)中实现。三大主题:差错检测、多路访问(共享介质谁先说话)、以太网与交换机。</p>
+
+<h3>4.1 差错检测</h3>
+<ul>
+<li><strong>奇偶校验</strong>:1 位只能检奇数个错;二维奇偶可纠正 1 位错。</li>
+<li><strong>校验和</strong>(传输层用):16 位反码和,软件实现快但检错弱。</li>
+<li><strong>CRC 循环冗余检验</strong>(链路层标准做法):选定 r+1 位生成多项式 G,在数据 D 后补 r 个 0,对 G 做<strong>模 2 除法</strong>(即异或),余数 R 作为 FCS 附在帧尾;接收方用 G 除整个 (D·2ʳ + R),余数为 0 即认为无错。能检出所有 ≤ r 位的突发错误。计算题:列竖式做异或除法,取 r 位余数。</li>
+</ul>
+
+<h3>4.2 多路访问协议:共享信道谁来用</h3>
+<ul>
+<li><strong>信道划分</strong>:TDM、FDM、CDMA——公平但低负载时浪费。</li>
+<li><strong>轮流</strong>:轮询(主结点点名,有轮询开销和单点故障)、令牌传递。</li>
+<li><strong>随机接入</strong>(重点):
+  <ul>
+  <li>时隙 ALOHA:想发就在下一时隙发,碰撞则以概率 p 重试,最大效率 1/e ≈ 37%;纯 ALOHA 减半 ≈ 18%。</li>
+  <li><strong>CSMA/CD</strong>(经典有线以太网):先听后发、边发边听,<strong>检测到碰撞立即停止</strong>并发拥塞信号,然后<strong>二进制指数退避</strong>——第 n 次碰撞后从 {0,1,…,2ᵐⁱⁿ⁽ⁿ,¹⁰⁾−1} 随机选 K,等 K·512 比特时间重试。</li>
+  <li>碰撞检测要求「发完之前必须能听到碰撞」:帧的传输时延 ≥ 2τ(端到端往返传播时延,称<strong>争用期</strong>),由此导出以太网<strong>最小帧长 64 字节</strong>;这也是网络跨度与速率互相制约的原因。</li>
+  </ul></li>
+</ul>
+
+<h3>4.3 MAC 地址与 ARP</h3>
+<ul>
+<li><strong>MAC 地址</strong>:48 位,烧录在网卡,全球唯一,扁平结构(与位置无关);IP 地址层次化(与所在网络有关)。两者都需要:IP 用于跨网选路,MAC 用于本地链路交付,而且主机换网络时 IP 变、MAC 不变。全 1(FF-FF-FF-FF-FF-FF)是广播地址。</li>
+<li><strong>ARP:IP → MAC 的翻译</strong>。发送方在本子网<strong>广播</strong> ARP 请求「谁是 x.x.x.x?」,目标主机<strong>单播</strong>应答自己的 MAC;结果缓存(带 TTL)。ARP 跨在网络层与链路层之间,即插即用。</li>
+<li><strong>关键规则:目的主机不在本子网时,帧的目的 MAC 填默认网关的 MAC</strong>(通过 ARP 查网关 IP 得到),绝不可能直接填最终目的主机的 MAC。</li>
+</ul>
+
+<h3>4.4 以太网帧</h3>
+<div class="hdrwrap"><div class="hdr" style="grid-template-columns:repeat(9,1fr)">
+<div class="f opt" style="grid-column:span 1">前导码 <small>8 B,同步用,不算帧长</small></div>
+<div class="f" style="grid-column:span 2">目的 MAC <small>6 B</small></div>
+<div class="f" style="grid-column:span 2">源 MAC <small>6 B</small></div>
+<div class="f" style="grid-column:span 1">类型 <small>2 B,0x0800=IP,0x0806=ARP</small></div>
+<div class="f pay" style="grid-column:span 2">数据 <small>46–1500 B(不足 46 填充)</small></div>
+<div class="f" style="grid-column:span 1">FCS <small>4 B,CRC</small></div>
+</div></div>
+<ul>
+<li>帧长 64–1518 字节(首尾共 18 字节 + 数据 46–1500)。以太网提供<strong>无连接、不可靠</strong>服务:CRC 出错直接丢帧,不重传——可靠性由上面的 TCP 兜底。现代交换式全双工以太网已无碰撞,CSMA/CD 只具历史与考试意义。</li>
+</ul>
+
+<h3>4.5 交换机</h3>
+<ul>
+<li><strong>自学习</strong>:收到帧就把(源 MAC → 入端口)记入交换表;转发时查目的 MAC,查不到则向除入口外所有端口<strong>泛洪</strong>,查到则定向转发(目的与来源同端口则过滤丢弃)。即插即用,无需配置。</li>
+<li>交换机<strong>分隔碰撞域</strong>(每端口独立碰撞域,全双工下无碰撞),但<strong>不分隔广播域</strong>;路由器两者都分隔。<strong>VLAN</strong> 在一台交换机上切出多个逻辑局域网/广播域,跨交换机用 802.1Q 标签(帧内插 4 字节 VLAN ID)中继,VLAN 之间必须经路由器/三层交换互通。</li>
+</ul>
+<div class="tblwrap"><table>
+<tr><th></th><th>集线器</th><th>交换机</th><th>路由器</th></tr>
+<tr><td><b>工作层</b></td><td>物理层</td><td>链路层</td><td>网络层</td></tr>
+<tr><td><b>依据</b></td><td>无(比特再生广播)</td><td>MAC 地址,自学习</td><td>IP 地址,路由算法</td></tr>
+<tr><td><b>隔离碰撞域</b></td><td>否</td><td>是</td><td>是</td></tr>
+<tr><td><b>隔离广播域</b></td><td>否</td><td>否(除非 VLAN)</td><td>是</td></tr>
+</table></div>
+
+<div class="box memo"><span class="cap">经典大题:数据报过路由器,谁变谁不变</span>
+帧每过一台路由器就被拆掉重封:<strong>源/目的 MAC 每跳都换</strong>(变为当前链路两端接口的 MAC);<strong>源/目的 IP 全程不变</strong>(除非经过 NAT);TTL 减 1,IP 首部校验和重算。交换机则什么都不改。</div>
+
+<h2 id="s5"><span class="no">5</span>物理层:比特与信号<span class="layer-tag t-phy">Physical</span></h2>
+<ul>
+<li>任务:定义接口的机械/电气/功能特性,完成编码(如曼彻斯特、4B/5B)与调制(调幅/调频/调相、QAM),把比特流搬上介质。</li>
+<li><strong>两个极限公式</strong>(计算题):
+  <ul>
+  <li>奈奎斯特(无噪声):C = 2W·log₂V(W 为带宽 Hz,V 为每码元离散电平数)。</li>
+  <li><strong>香农(有噪声)</strong>:C = W·log₂(1 + S/N)。注意信噪比常以分贝给出:dB = 10·log₁₀(S/N),30 dB 即 S/N = 1000。</li>
+  </ul></li>
+<li>传输介质:双绞线(百米级,以太网主流)、同轴电缆、<strong>光纤</strong>(带宽大、衰减小、抗电磁干扰,长途骨干)、无线电/微波/卫星(广播式,易受干扰)。</li>
+</ul>
+
+<h2 id="s6"><span class="no">6</span>无线网络:802.11 要点</h2>
+<ul>
+<li>无线链路的特殊性:信号衰减快、多径传播、易受干扰,且<strong>无法边发边听</strong>(自己的发送功率淹没接收),还有<strong>隐藏终端问题</strong>(A、C 都听不到对方却同时向 B 发送)——所以碰撞检测不可行,改用<strong>碰撞避免 CSMA/CA</strong>。</li>
+<li>CSMA/CA:信道空闲等 DIFS 后发送;信道忙则先退避(倒计时在信道空闲时才递减);由于无法检测碰撞,<strong>每个数据帧都需要接收方回 ACK</strong>,没等到就重传。可选 <strong>RTS/CTS</strong> 短帧预约信道,专治隐藏终端:B 广播的 CTS 让 C 闭嘴。</li>
+<li>基础设施模式:AP + 基本服务集 BSS;AP 周期广播信标帧(含 SSID),主机扫描、关联后才经 AP 收发。802.11 帧有<strong>三个地址</strong>常考:接收方 MAC、发送方 MAC、以及 AP 与有线网互联所需的路由器/目的 MAC。</li>
+<li>移动性:蜂窝网/移动 IP 用「本地代理 + 转交地址 + 隧道」让移动主机保持可达,原理与 4G/5G 核心网锚点一致。</li>
+</ul>
+
+<h2 id="s7"><span class="no">7</span>网络安全:加密体系与 TLS</h2>
+<ul>
+<li>四大目标:<strong>机密性、报文完整性、端点鉴别、不可否认</strong>。</li>
+<li><strong>对称加密</strong>(AES):同一密钥加解密,快,但有密钥分发难题。<strong>公钥加密</strong>(RSA、ECC):公钥加密、私钥解密,慢约千倍。实践永远是<strong>混合</strong>:公钥体制协商出对称会话密钥,数据用对称加密。</li>
+<li><strong>报文完整性</strong>:密码散列(SHA-256)+ 共享秘密 → MAC(报文鉴别码,如 HMAC)。<strong>数字签名</strong>:用<strong>私钥</strong>对报文散列加密,任何人用公钥验证——同时提供完整性、鉴别与不可否认。</li>
+<li><strong>证书与 CA</strong>:解决「这个公钥真是这个网站的吗」。CA 用自己的私钥给「域名 + 公钥」签名成证书;浏览器内置根 CA 公钥,沿信任链验证。</li>
+<li><strong>TLS 握手</strong>(HTTPS = HTTP over TLS):客户端发支持的算法 + 随机数 → 服务器回选定算法 + 证书 + 随机数 → 客户端验证证书、通过密钥交换(现代用 ECDHE,提供前向保密)算出共享主密钥 → 双方派生会话密钥,此后全部对称加密 + MAC。TLS 1.3 把握手压到 1 RTT。</li>
+<li>常考攻击一句话:嗅探(交换网络中用 ARP 欺骗实现中间人)、IP 欺骗、SYN 洪泛(DoS)、DDoS(僵尸网络)、DNS 缓存投毒。防火墙按规则过滤分组;IDS 深度检测报文内容。</li>
+</ul>
+
+<h2 id="s8"><span class="no">8</span>全链路串讲:从输入 URL 到页面渲染</h2>
+
+<p>这是把五层串成一条线的终极题,也是理解全书的试金石。设主机刚接入网络,在浏览器输入 <code>http://www.example.com</code>:</p>
+
+<ol>
+<li><strong>获取网络配置(DHCP)</strong><span class="layer-tag t-app">App</span>:主机广播 DHCP Discover(UDP 68→67,IP 源 0.0.0.0、目的 255.255.255.255,以太网广播帧),经 Offer/Request/ACK 拿到:自己的 IP、子网掩码、<strong>默认网关 IP、本地 DNS 服务器 IP</strong>。</li>
+<li><strong>找到网关的 MAC(ARP)</strong><span class="layer-tag t-link">Link</span>:DNS 服务器不在本子网,数据要发给默认网关。主机广播 ARP 请求网关 IP,网关单播回其 MAC,缓存之。</li>
+<li><strong>域名解析(DNS)</strong><span class="layer-tag t-app">App</span>:先查本机/浏览器缓存;未命中则向本地 DNS 服务器发 UDP 53 查询(递归),本地 DNS 依次迭代查询根 → .com TLD → example.com 权威服务器,拿到 A 记录,层层缓存后返回 IP。</li>
+<li><strong>建立 TCP 连接</strong><span class="layer-tag t-tr">Transport</span>:主机以随机临时端口向服务器 80 端口三次握手(SYN → SYN+ACK → ACK)。若是 HTTPS,再叠加 TLS 握手协商会话密钥。</li>
+<li><strong>逐跳转发</strong><span class="layer-tag t-net">Net</span>:每个 TCP 段封装成 IP 数据报。若主机在内网,出口处 <strong>NAT</strong> 改写源 IP:端口并记表。每台路由器<strong>最长前缀匹配</strong>查转发表选下一跳(转发表由 OSPF/BGP 事先算好),TTL 减 1、重算首部校验和、<strong>重新封装链路层帧(MAC 换成本跳两端)</strong>,源/目的 IP 不变。</li>
+<li><strong>请求与响应(HTTP)</strong><span class="layer-tag t-app">App</span>:发送 <code>GET / HTTP/1.1</code>(带 Host、Cookie 等首部);服务器(或 CDN 边缘节点、或命中的 Web 缓存)回 <code>200 OK</code> + HTML。传输过程中 TCP 负责按序重组、丢包重传,拥塞窗口从慢启动逐渐张开;接收窗口防止压垮浏览器。</li>
+<li><strong>渲染与后续</strong>:浏览器解析 HTML,对其中每个图片/脚本对象在持续连接上继续发 GET(HTTP/2 则多路复用并发取)。连接空闲后四次挥手关闭,主动关闭方进 TIME_WAIT。</li>
+</ol>
+
+<div class="box"><span class="cap">一句话总结整门课</span>
+DNS 把名字换成地址,TCP 把不可靠网络包装成可靠管道,IP 把数据报逐跳路由到目的主机,ARP 和以太网把每一跳落实为一次链路层交付,物理层把它变成信号。每层只依赖下层的服务、只对上层负责——这就是分层的全部含义。</div>
+
+<h2 id="s9"><span class="no">9</span>考前速查</h2>
+
+<h3>9.1 必背数字</h3>
+<div class="tblwrap"><table>
+<tr><th>项目</th><th>值</th><th>项目</th><th>值</th></tr>
+<tr><td>HTTP / HTTPS</td><td class="num">TCP 80 / 443</td><td>DNS</td><td class="num">UDP 53</td></tr>
+<tr><td>SMTP</td><td class="num">TCP 25</td><td>POP3 / IMAP</td><td class="num">TCP 110 / 143</td></tr>
+<tr><td>FTP 控制 / 数据</td><td class="num">TCP 21 / 20</td><td>DHCP</td><td class="num">UDP 67(服)/ 68(客)</td></tr>
+<tr><td>SSH / Telnet</td><td class="num">TCP 22 / 23</td><td>BGP</td><td class="num">TCP 179</td></tr>
+<tr><td>UDP 首部</td><td class="num">8 B</td><td>TCP / IP 首部</td><td class="num">20–60 B</td></tr>
+<tr><td>IPv6 首部</td><td class="num">40 B 定长</td><td>以太网帧</td><td class="num">64–1518 B,MTU 1500</td></tr>
+<tr><td>MAC / IPv4 / IPv6 地址</td><td class="num">48 / 32 / 128 位</td><td>TIME_WAIT</td><td class="num">2 MSL</td></tr>
+<tr><td>快重传触发</td><td class="num">3 个冗余 ACK</td><td>信号传播速率</td><td class="num">≈ 2×10⁸ m/s</td></tr>
+<tr><td>IP 协议字段</td><td class="num">ICMP 1 · TCP 6 · UDP 17</td><td>私有地址</td><td class="num">10/8 · 172.16/12 · 192.168/16</td></tr>
+</table></div>
+
+<h3>9.2 高频对比一览</h3>
+<div class="tblwrap"><table>
+<tr><th>对比</th><th>关键差异(一句话)</th></tr>
+<tr><td><b>TCP vs UDP</b></td><td>面向连接、可靠字节流、流控 + 拥塞控制、首部 20B vs 无连接、尽力交付、报文边界保留、首部 8B、时延低</td></tr>
+<tr><td><b>GBN vs SR</b></td><td>累积确认 + 整窗重传 + 接收窗口 1 vs 逐个确认 + 单个重传 + 缓存失序;窗口上限 2ᵏ−1 vs 2ᵏ⁻¹</td></tr>
+<tr><td><b>流量控制 vs 拥塞控制</b></td><td>保护接收方(rwnd,对方通告)vs 保护网络(cwnd,自己推断);发送窗口取两者较小</td></tr>
+<tr><td><b>转发 vs 路由</b></td><td>数据平面单机查表挪分组 vs 控制平面全网算表;硬件纳秒级 vs 软件秒级</td></tr>
+<tr><td><b>LS vs DV</b></td><td>全网拓扑 + Dijkstra + 收敛快 vs 邻居交换 + Bellman-Ford + 计数到无穷</td></tr>
+<tr><td><b>OSPF vs BGP</b></td><td>AS 内、链路状态、追求性能 vs AS 间、路径向量、策略优先、跑 TCP</td></tr>
+<tr><td><b>IP vs MAC</b></td><td>层次化、随网络变、用于选路 vs 扁平、终身不变、用于本链路交付;逐跳:MAC 变 IP 不变</td></tr>
+<tr><td><b>交换机 vs 路由器</b></td><td>二层、自学习即插即用、隔碰撞域 vs 三层、跑路由协议、隔广播域</td></tr>
+<tr><td><b>CSMA/CD vs CSMA/CA</b></td><td>有线、碰撞检测停发 + 指数退避 vs 无线、无法边发边听 → 先退避 + 逐帧 ACK + RTS/CTS</td></tr>
+<tr><td><b>递归 vs 迭代查询</b></td><td>被问者全权代办 vs 被问者只指路;主机→本地 DNS 递归,本地 DNS 向外迭代</td></tr>
+<tr><td><b>电路交换 vs 分组交换</b></td><td>预留资源、时延确定、利用率低 vs 统计复用、利用率高、有排队与丢包</td></tr>
+</table></div>
+
+<h3>9.3 计算题清单(逐个过一遍)</h3>
+<ol>
+<li><strong>时延</strong>:分清传输 L/R 与传播 d/s;存储转发多跳累加;流水线传输总时延 = 首个分组到达时间 + (N−1)·L/R。</li>
+<li><strong>停等利用率 / 窗口</strong>:U = (L/R)/(RTT + L/R);要打满链路,窗口 ≥ 时延带宽积 + 1 个帧。</li>
+<li><strong>子网划分</strong>:给 /x 求掩码、网络地址、广播地址、可用主机数;给主机数需求反推前缀;路由聚合与最长前缀匹配判转发出口。</li>
+<li><strong>IP 分片</strong>:片数 = ⌈数据长 / (MTU−20 取 8 的倍数)⌉;写出每片的长度、MF、偏移(÷8)。</li>
+<li><strong>TCP 序号</strong>:ack = 已按序收到的最后字节 + 1;第二段序号 = 第一段序号 + 第一段数据长度。</li>
+<li><strong>拥塞窗口演化</strong>:给 ssthresh 与丢包事件,逐 RTT 列 cwnd(慢启动翻倍、拥塞避免加一、超时归 1、3 冗余 ACK 腰斩)。</li>
+<li><strong>RTT 估计</strong>:代公式 EstimatedRTT、DevRTT、Timeout = Est + 4·Dev。</li>
+<li><strong>Dijkstra / DV 迭代表</strong>:按算法列表格逐步填,DV 注意链路变价后的重新通告。</li>
+<li><strong>CRC</strong>:模 2 除法求余数;验证时余 0 为通过。</li>
+<li><strong>香农 / 奈奎斯特</strong>:注意 dB 换算与 log₂。</li>
+<li><strong>DNS/HTTP 响应时间</strong>:累加各级 DNS 查询 RTT + TCP 握手 1 RTT + 每对象请求 RTT(区分非持续/持续/流水线)。</li>
+</ol>
+
+<h3>9.4 最容易写错的 10 个坑</h3>
+<ol>
+<li>传播时延与分组长度无关;传输时延与距离无关。</li>
+<li>DNS 主要用 UDP,但它是<strong>应用层</strong>协议;DHCP、RIP 同理(RIP 跑 UDP 520,OSPF 直接封装在 IP,BGP 跑 TCP)。</li>
+<li>TCP 的 ack 是「期望的下一个字节」,不是「已收到的最后字节」。</li>
+<li>三次握手第三个 ACK 可以带数据;SYN/FIN 各占一个序号但不含数据。</li>
+<li>IP 首部校验和只覆盖首部且每跳重算;UDP/TCP 校验和覆盖伪首部 + 首部 + 数据。</li>
+<li>分片在任何缺 MTU 的路由器都可能发生,重组只在目的主机。</li>
+<li>可用主机数要减 2(网络地址与广播地址);/31、/30 点对点链路是例外考点。</li>
+<li>交换机查不到目的 MAC 是泛洪,不是丢弃;路由器查不到路由才丢弃(或走默认路由)。</li>
+<li>发往外网的帧,目的 MAC 是网关的,不是目的主机的。</li>
+<li>快恢复后进入拥塞避免(线性),不是慢启动;只有超时才回 cwnd = 1。</li>
+</ol>
+
+<footer>为课程复习整理 · 2026 年 8 月</footer>
+<footer>为课程复习整理 · 2026 年 8 月</footer>
+<footer>为课程复习整理 · 2026 年 8 月 · 骨架:Kurose &amp; Ross《计算机网络:自顶向下方法》</footer>
+</div>
