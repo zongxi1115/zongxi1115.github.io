@@ -1,0 +1,487 @@
+<title>操作系统的诞生</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root {
+  --paper: #f6f7f3;
+  --card: #fdfdfb;
+  --ink: #22302a;
+  --ink-soft: #5a685f;
+  --line: #dde2da;
+  --accent: #23795a;       /* 电路板绿：内核 */
+  --accent-soft: rgba(35,121,90,.10);
+  --copper: #a85f1e;       /* 铜色：翻车与警示 */
+  --copper-soft: rgba(168,95,30,.10);
+  --code-bg: #edf0ea;
+  --mark: rgba(35,121,90,.16);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #131715;
+    --card: #1a201c;
+    --ink: #e2e8e2;
+    --ink-soft: #94a29a;
+    --line: #2b332e;
+    --accent: #58bd92;
+    --accent-soft: rgba(88,189,146,.13);
+    --copper: #d99050;
+    --copper-soft: rgba(217,144,80,.13);
+    --code-bg: #202722;
+    --mark: rgba(88,189,146,.20);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #131715;
+  --card: #1a201c;
+  --ink: #e2e8e2;
+  --ink-soft: #94a29a;
+  --line: #2b332e;
+  --accent: #58bd92;
+  --accent-soft: rgba(88,189,146,.13);
+  --copper: #d99050;
+  --copper-soft: rgba(217,144,80,.13);
+  --code-bg: #202722;
+  --mark: rgba(88,189,146,.20);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16.5px;
+  line-height: 1.95;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.4rem 6rem; }
+
+/* ---------- 头部 ---------- */
+header { padding: 5.5rem 0 3rem; border-bottom: 1px solid var(--line); }
+.eyebrow {
+  font-size: .78rem; letter-spacing: .35em; text-transform: uppercase;
+  color: var(--accent); font-weight: 700; margin-bottom: 1.2rem;
+}
+h1 {
+  font-family: "Noto Serif SC", serif; font-weight: 900;
+  font-size: clamp(2.3rem, 6vw, 3.4rem); line-height: 1.25;
+  margin: 0 0 1.2rem; text-wrap: balance;
+}
+.subtitle { color: var(--ink-soft); font-size: 1.05rem; max-width: 36em; }
+.subtitle strong { color: var(--ink); }
+
+/* ---------- 目录 ---------- */
+nav.toc {
+  margin: 2.6rem 0 0; padding: 1.4rem 1.6rem;
+  background: var(--card); border: 1px solid var(--line); border-radius: 4px;
+}
+nav.toc .toc-title { font-size: .78rem; letter-spacing: .3em; color: var(--ink-soft); font-weight: 700; margin-bottom: .7rem; }
+nav.toc ol { margin: 0; padding: 0; list-style: none; display: grid; gap: .35rem; }
+nav.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px dashed var(--line); }
+nav.toc a:hover, nav.toc a:focus-visible { color: var(--accent); border-bottom-color: var(--accent); }
+nav.toc .num { font-family: "JetBrains Mono", monospace; font-size: .8rem; color: var(--accent); margin-right: .6rem; }
+
+/* ---------- 章节 ---------- */
+section.chapter { padding-top: 4.5rem; }
+.ch-label {
+  font-family: "JetBrains Mono", monospace; font-size: .8rem;
+  color: var(--accent); letter-spacing: .25em; font-weight: 600;
+}
+h2 {
+  font-family: "Noto Serif SC", serif; font-weight: 900;
+  font-size: clamp(1.6rem, 4vw, 2.1rem); line-height: 1.35;
+  margin: .4rem 0 .6rem; text-wrap: balance;
+}
+.ch-question {
+  color: var(--ink-soft); font-style: normal; margin: 0 0 2rem;
+  padding-left: 1rem; border-left: 3px solid var(--accent);
+}
+h3 {
+  font-family: "Noto Serif SC", serif; font-weight: 700;
+  font-size: 1.25rem; margin: 2.6rem 0 .8rem; text-wrap: balance;
+}
+p { margin: 0 0 1.1rem; }
+strong { font-weight: 700; background: linear-gradient(transparent 62%, var(--mark) 62%); padding: 0 .1em; }
+em { font-style: normal; color: var(--accent); font-weight: 500; }
+
+/* ---------- 卡片 ---------- */
+.think, .crash, .term {
+  border-radius: 4px; padding: 1.1rem 1.4rem; margin: 1.6rem 0;
+  border: 1px solid var(--line); background: var(--card);
+}
+.think { border-left: 4px solid var(--accent); }
+.crash { border-left: 4px solid var(--copper); }
+.term  { border-left: 4px solid var(--line); }
+.tag {
+  display: inline-block; font-size: .72rem; font-weight: 700;
+  letter-spacing: .22em; margin-bottom: .5rem; padding: .1rem .55rem;
+  border-radius: 2px;
+}
+.think .tag { color: var(--accent); background: var(--accent-soft); }
+.crash .tag { color: var(--copper); background: var(--copper-soft); }
+.term  .tag { color: var(--ink-soft); background: var(--code-bg); }
+.think p:last-child, .crash p:last-child, .term p:last-child { margin-bottom: 0; }
+
+/* ---------- 代码 / 等宽 ---------- */
+code {
+  font-family: "JetBrains Mono", "Noto Sans SC", monospace; font-size: .85em;
+  background: var(--code-bg); padding: .12em .4em; border-radius: 3px;
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--line); border-radius: 4px;
+  padding: 1rem 1.2rem; overflow-x: auto; margin: 1.4rem 0;
+  line-height: 1.7;
+}
+pre code { background: none; padding: 0; font-size: .84rem; }
+pre.mermaid { background: var(--card); text-align: center; }
+
+/* ---------- 表格 ---------- */
+.tbl-wrap { overflow-x: auto; margin: 1.4rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { border: 1px solid var(--line); padding: .55rem .8rem; text-align: left; vertical-align: top; }
+th { background: var(--code-bg); font-weight: 700; white-space: nowrap; }
+td { background: var(--card); }
+tbody td:first-child { white-space: nowrap; font-weight: 500; }
+
+ul, ol { margin: 0 0 1.1rem; padding-left: 1.6rem; }
+li { margin-bottom: .35rem; }
+
+hr.ch-end { border: none; border-top: 1px solid var(--line); margin: 4rem auto 0; width: 40%; }
+
+.finale {
+  margin-top: 4rem; padding: 2rem 1.8rem;
+  background: var(--card); border: 1px solid var(--line); border-radius: 4px;
+}
+.finale h3 { margin-top: 0; }
+
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Operating Systems · 一部推导史</div>
+  <h1>操作系统的诞生</h1>
+  <p class="subtitle">这不是一份名词表。我们从<strong>一台什么都没有的裸机</strong>出发，每一章都提出一个真实的困境，先试最天真的方案，看着它翻车，再一步步修补——直到今天教科书里的进程、页表、锁和文件系统，一个个被"逼"出来。你会发现：<strong>操作系统里没有一个概念是凭空发明的，全都是对某个具体问题的回应。</strong></p>
+
+  <nav class="toc" aria-label="目录">
+    <div class="toc-title">目录</div>
+    <ol>
+      <li><span class="num">00</span><a href="#ch0">序章 · 一台什么都没有的机器</a></li>
+      <li><span class="num">01</span><a href="#ch1">让 CPU 学会分身 —— 进程与调度</a></li>
+      <li><span class="num">02</span><a href="#ch2">给每个程序一个平行宇宙 —— 虚拟内存</a></li>
+      <li><span class="num">03</span><a href="#ch3">当分身开始打架 —— 并发与锁</a></li>
+      <li><span class="num">04</span><a href="#ch4">对抗断电与遗忘 —— 文件系统</a></li>
+      <li><span class="num">05</span><a href="#ch5">终章 · 开机之后的一秒钟</a></li>
+    </ol>
+  </nav>
+</header>
+
+<!-- ============ 序章 ============ -->
+<section class="chapter" id="ch0">
+  <div class="ch-label">CH.00 / 序章</div>
+  <h2>一台什么都没有的机器</h2>
+  <p class="ch-question">在有操作系统之前，计算机是怎么工作的？它到底缺了什么？</p>
+
+  <p>想象你面前有一台刚出厂的计算机：一块 CPU，一条内存，一块磁盘。没有 Windows，没有 Linux，什么软件都没有。它能做的事情其实极其单纯——</p>
+  <p><strong>CPU 一生只做一件事：从内存里取出一条指令，执行它，然后取下一条。</strong>取指、译码、执行，周而复始，每秒几十亿次。它不知道什么是"程序"，更不知道什么是"应用"，它只认识内存地址和指令。</p>
+  <p>那这样一台机器怎么跑程序？很简单：把程序的机器码放进内存，让 CPU 的指令指针指向第一条指令，它就跑起来了。早期的计算机确实就是这么用的——<em>一次装一个程序，跑完，换下一个</em>。这种时代甚至有个专门的名字：批处理。</p>
+  <p>听起来能用。但只要多用几天，三个致命问题就会浮出水面：</p>
+
+  <div class="crash">
+    <span class="tag">困境浮现</span>
+    <p><strong>问题一：CPU 大部分时间在发呆。</strong>程序一旦去读磁盘，CPU 就只能干等——磁盘比 CPU 慢几百万倍。一台昂贵的机器，99% 的时间在等 I/O。</p>
+    <p><strong>问题二：程序之间没有任何防护。</strong>如果内存里同时放两个程序，任何一个都可以随手改写另一个的内存，甚至改写机器的核心数据。一个 bug 就能带崩整台机器。</p>
+    <p><strong>问题三：硬件太难用了。</strong>想往磁盘写点东西？你得亲自操纵磁盘控制器的寄存器、算扇区号、处理磁头移动。每个程序员都要重写一遍这些底层细节。</p>
+  </div>
+
+  <p>盯着这三个问题看，你会发现它们指向同一个缺口：<strong>机器和程序之间，缺一层"中间人"</strong>。这个中间人要做三件事：</p>
+  <ul>
+    <li><strong>虚拟化（Virtualization）</strong>：把一个 CPU 变出"很多个"的假象，把一条内存变出"每人一份"的假象——解决独占和等待的问题；</li>
+    <li><strong>并发管理（Concurrency）</strong>：当多个执行流真的同时存在时，管住它们，别让它们互相踩踏；</li>
+    <li><strong>持久化（Persistence）</strong>：把"操纵磁盘寄存器"包装成"打开文件、写入、关闭"这样的人话。</li>
+  </ul>
+  <p>这个中间人，就是<strong>操作系统（Operating System）</strong>。接下来的四章，就是它逐步长出这三种能力的故事。记住这条主线——<strong>整本操作系统教材，其实只回答三个问题：怎么虚拟化、怎么管并发、怎么做持久化。</strong></p>
+  <hr class="ch-end">
+</section>
+
+<!-- ============ 第一章 ============ -->
+<section class="chapter" id="ch1">
+  <div class="ch-label">CH.01 / 虚拟化 CPU</div>
+  <h2>让 CPU 学会分身 —— 进程与调度</h2>
+  <p class="ch-question">只有一个 CPU，却想"同时"跑几十个程序，这个魔术是怎么变的？</p>
+
+  <h3>第一步：从"程序"到"进程"</h3>
+  <p>先想最朴素的方案：让 CPU 跑一会儿程序 A，暂停，跑一会儿程序 B，再切回 A……切得足够快，人眼看起来就是"同时在跑"。这个思路叫<strong>时分共享（time sharing）</strong>，方向完全正确。但立刻遇到一个具体问题：</p>
+  <p><em>暂停 A 的时候，怎么保证之后还能"原样"恢复它？</em></p>
+  <p>A 跑到一半，它的现场是什么？无非是：CPU 里各个寄存器的值（包括指令指针 PC——记录跑到哪一行了）、它的内存内容、它打开的文件等等。只要在暂停时<strong>把这些现场完整存下来，恢复时原样填回去，程序根本感觉不到自己被暂停过</strong>。</p>
+  <p>于是一个核心概念被逼出来了：</p>
+
+  <div class="term">
+    <span class="tag">概念诞生</span>
+    <p><strong>进程（Process）= 程序 + 它的运行现场。</strong>程序是静态的一堆指令（磁盘上的文件）；进程是这堆指令"活起来"之后的样子，包括它的寄存器值、它的内存（地址空间）、打开的文件列表。操作系统为每个进程维护一个记录本，叫 <strong>PCB（进程控制块）</strong>，现场就存在这里。切换进程时保存旧现场、装载新现场的动作，叫<strong>上下文切换（context switch）</strong>。</p>
+  </div>
+
+  <h3>第二步：谁来喊"停"？——从合作到抢占</h3>
+  <p>现场能存了，下一个问题：<em>切换的时机由谁决定？</em></p>
+  <p>天真方案：相信程序自己。约定每个程序跑一段就主动调用 <code>yield()</code> 交出 CPU。这叫<strong>协作式调度</strong>，早期的 Windows 3.x 和 Mac OS 9 真的就是这么干的。</p>
+
+  <div class="crash">
+    <span class="tag">翻车现场</span>
+    <p>某个程序写了个死循环 <code>while(1);</code>，它永远不会调用 yield——<strong>整台机器就此卡死，操作系统连插手的机会都没有</strong>。因为 OS 也只是内存里的一段代码，CPU 不跑到它头上，它就是死的。靠自觉，等于没有规则。</p>
+  </div>
+
+  <p>要打破僵局，必须有一个<strong>不依赖程序配合、能强行把 CPU 抢回来</strong>的机制。软件做不到（软件得先被执行才有话语权），所以只能求助硬件：</p>
+  <p><strong>时钟中断（timer interrupt）</strong>。主板上装一个定时器，每隔几毫秒硬件强制打断 CPU，让它跳到操作系统预先登记好的一段代码去执行。这一跳，控制权就回到了 OS 手里——它可以决定：继续跑刚才的进程，还是换一个。这就是<strong>抢占式调度（preemptive scheduling）</strong>。</p>
+  <p><strong>时钟中断是操作系统真正"掌权"的根基</strong>——没有它，OS 只是一个被程序召之即来挥之即去的函数库。</p>
+
+  <h3>第三步：不能让程序为所欲为——用户态与内核态</h3>
+  <p>还剩序章里的"防护"问题：进程要是自己去改时钟、直接操作磁盘、修改别人的内存怎么办？解决思路是给 CPU 设两种身份：</p>
+  <ul>
+    <li><strong>内核态（kernel mode）</strong>：什么指令都能执行，操作系统的代码运行在这个身份下；</li>
+    <li><strong>用户态（user mode）</strong>：危险指令（操作硬件、改中断设置等）一执行就触发异常，普通程序被关在这个身份里。</li>
+  </ul>
+  <p>可程序总有正当理由要做危险的事，比如读文件。怎么办？<strong>开一扇受控的门：系统调用（system call）</strong>。程序执行一条特殊的 <code>trap</code> 指令，CPU 自动切到内核态、跳到 OS 预设的入口；OS 检查请求是否合法，代为执行，再降回用户态把结果还给程序。</p>
+  <p>你平时写的 <code>open()</code>、<code>read()</code>、<code>fork()</code>，本质都是这扇门上的门铃。<strong>这套"平时受限运行、有事 trap 进门"的机制叫受限直接执行（Limited Direct Execution）</strong>——"直接"保证了效率（大部分时间程序直接在 CPU 上裸跑，没有中间层），"受限"保证了安全。</p>
+
+  <h3>第四步：进程的一生——状态机</h3>
+  <p>现在把视角拉远。任意时刻，一个进程处在什么状态？梳理一下无非三种：正占着 CPU 的（<em>运行 Running</em>）、随时能跑但还没轮到的（<em>就绪 Ready</em>）、在等某件事发生（比如磁盘读完）暂时跑不了的（<em>阻塞 Blocked</em>）。</p>
+
+  <pre class="mermaid">
+stateDiagram-v2
+    direction LR
+    [*] --> 就绪 : 创建 fork()
+    就绪 --> 运行 : 调度器选中
+    运行 --> 就绪 : 时间片用完(时钟中断)
+    运行 --> 阻塞 : 发起 I/O / 等待事件
+    阻塞 --> 就绪 : I/O 完成(中断)
+    运行 --> [*] : exit()
+  </pre>
+
+  <p>这个状态机里藏着序章"CPU 发呆"问题的答案：<strong>当进程 A 阻塞在磁盘 I/O 上时，OS 立刻把 CPU 切给就绪队列里的 B——等待和计算被重叠起来，CPU 的空转消失了。</strong>这正是多道程序设计（multiprogramming）的全部意义。</p>
+
+  <div class="term">
+    <span class="tag">Unix 的三板斧</span>
+    <p>在 Unix 世界里，进程的创建与运行由三个系统调用协作完成：<strong><code>fork()</code> 把当前进程完整复制一份</strong>（父子进程从同一行代码继续，靠返回值区分彼此）；<strong><code>exec()</code> 把当前进程的内容替换成另一个程序</strong>（脱胎换骨，进程号不变）；<strong><code>wait()</code> 让父进程等子进程结束</strong>。你在终端敲 <code>ls</code>，shell 做的就是 fork 出一个分身，分身 exec 成 ls，shell 自己 wait——分离 fork 和 exec，正是为了让 shell 有机会在两步之间做重定向、管道这些小动作。</p>
+  </div>
+
+  <h3>第五步：轮到谁跑？——调度策略的进化</h3>
+  <p>机制（怎么切换）解决了，还剩策略（切给谁）。这是一条不断发现新矛盾的进化链，值得按顺序走一遍，因为<strong>每一种调度算法都是对前一种缺陷的直接回应</strong>：</p>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>策略</th><th>思路</th><th>翻车点 → 引出下一个</th></tr></thead>
+    <tbody>
+      <tr><td>FIFO 先来先服务</td><td>按到达顺序排队跑完</td><td>短任务排在长任务后面干等（护航效应），平均周转时间惨不忍睹</td></tr>
+      <tr><td>SJF 最短任务优先</td><td>先跑最短的</td><td>长任务先到已开跑，短任务来了还是得等——需要抢占</td></tr>
+      <tr><td>STCF 最短剩余时间优先</td><td>随时抢占，永远跑剩余最短的</td><td>周转时间最优，但长任务可能饿死；而且交互程序响应差——没人愿意打字后卡三秒</td></tr>
+      <tr><td>RR 时间片轮转</td><td>每人跑一小片，轮流来</td><td>响应时间极好，周转时间变差；片太短则切换开销吃掉性能</td></tr>
+      <tr><td>MLFQ 多级反馈队列</td><td>多层优先级：新任务放最高层，用满时间片就降级</td><td>不需预知任务长短，<strong>用历史行为预测未来</strong>：交互型（常主动放弃 CPU）自然留在高层，计算型自然沉底。需定期整体提升防饿死</td></tr>
+      <tr><td>CFS 完全公平调度（Linux）</td><td>记录每个任务的虚拟运行时间 vruntime，永远挑最小的跑</td><td>用红黑树管理，把"公平"变成可计算的量；权重（nice 值）让 vruntime 走得快慢不同，实现优先级</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="think">
+    <span class="tag">思考方法</span>
+    <p>注意这条链上反复出现的张力：<strong>周转时间（吞吐）和响应时间（交互体验）是一对天生的冤家</strong>，优化一个必然牺牲另一个。工程里没有"最好的调度算法"，只有"最适合当前负载的取舍"。遇到任何调度类问题，先问：这个场景里，我更在乎哪个指标？</p>
+  </div>
+  <hr class="ch-end">
+</section>
+
+<!-- ============ 第二章 ============ -->
+<section class="chapter" id="ch2">
+  <div class="ch-label">CH.02 / 虚拟化内存</div>
+  <h2>给每个程序一个平行宇宙 —— 虚拟内存</h2>
+  <p class="ch-question">几十个进程挤在同一条物理内存里，怎么让每一个都以为整条内存归自己？</p>
+
+  <h3>第一步：为什么不能直接用物理地址</h3>
+  <p>CPU 虚拟化解决后，内存里同时住着多个进程。如果程序直接使用物理地址，马上有两个灾难：其一，程序 A 一个指针越界就写坏了 B 的数据，<em>毫无保护</em>；其二，程序编译时写死的地址（比如"跳转到 0x4000"）要求它必须被装载到固定位置，<em>两个程序想用同一个地址就打架了</em>。</p>
+  <p>解决思路和 CPU 那章如出一辙：<strong>加一层翻译。程序看到的地址是假的（虚拟地址），每次访存时由硬件翻译成真实位置（物理地址）</strong>。每个进程拥有一套独立的翻译规则，于是每个进程都活在自己的"平行宇宙"里：它以为地址从 0 开始、整条内存归它——这套假象叫<strong>地址空间（address space）</strong>，里面按惯例放着代码段、堆（向下长）和栈（向上长）。</p>
+
+  <h3>第二步：翻译规则怎么设计？——三次迭代</h3>
+  <p><strong>迭代一：基址 + 界限寄存器。</strong>最简单的翻译：物理地址 = 虚拟地址 + 基址寄存器，同时检查不许超过界限。硬件便宜，切换进程时换一下寄存器就行。<em>翻车点</em>：每个进程必须占一段连续的物理内存，而堆和栈中间那一大块没用到的空隙也被白白占着；进程来来去去之后，内存里布满大小不一的空洞——<strong>外部碎片</strong>，明明总空闲够，却找不出一块连续的大空间。</p>
+  <p><strong>迭代二：分段（segmentation）。</strong>那就别整段搬，把代码、堆、栈各自作为一个"段"，每段一对基址/界限，分开放置。空隙问题缓解了。<em>翻车点</em>：段仍然是大小不一的连续块，外部碎片依旧存在，只是从"每进程一个洞"变成"每段一个洞"。</p>
+  <p><strong>迭代三：分页（paging）。</strong>问题的根源是"大小不一"。那就一刀切：<strong>把虚拟地址空间切成固定大小的页（page，通常 4KB），物理内存切成同样大小的帧（frame），任何一页可以放进任何一帧</strong>。大小全部相同，就不存在"放不进去"的洞——外部碎片被彻底消灭。每个进程配一张<strong>页表（page table）</strong>，记录"我的第 N 页放在物理的第几帧"。</p>
+
+  <div class="term">
+    <span class="tag">地址翻译的算术</span>
+    <p>一个 32 位虚拟地址、4KB 页的系统里，地址被拆成两半：<strong>高 20 位是页号（查页表用），低 12 位是页内偏移（原样保留）</strong>。翻译 = 用页号查页表得到帧号，帧号拼上偏移就是物理地址。页表项（PTE）里除了帧号还有几个关键标志位：<em>有效位</em>（这页在不在内存）、<em>保护位</em>(可读/可写/可执行)、<em>脏位</em>（被写过没有）、<em>访问位</em>（最近用过没有）——后面每一位都会派上用场。</p>
+  </div>
+
+  <h3>第三步：两个新麻烦，两个经典解法</h3>
+  <p>分页优雅，但自身带来两个代价，教科书里最重要的两个机制就是为它们生的。</p>
+  <p><strong>麻烦一：页表太大。</strong>32 位地址空间有 2²⁰ = 100 万个页，每个进程一张百万条目的表，光页表就吃掉 4MB；64 位下更是天文数字。<em>观察</em>：绝大多数进程只用了地址空间的一小角，页表里 99% 的条目是无效的。<em>解法</em>：<strong>多级页表——把页表本身也切成页，再用一张"页目录"索引它们；整块无效的区域连页表页都不分配</strong>。用"按需生长的树"替代"一次铺满的数组"。x86-64 用的是四级页表，正在向五级演进。</p>
+  <p><strong>麻烦二：访存次数翻倍。</strong>每次访问数据前得先访问内存里的页表（多级页表下是先访问四次！）。<em>解法</em>：<strong>TLB（Translation Lookaside Buffer）——在 CPU 里放一个小缓存，存最近用过的"页号 → 帧号"映射</strong>。命中（绝大多数情况）翻译零开销；未命中才去走页表。TLB 能救场，靠的是程序访存的<strong>局部性</strong>：刚访问过的页，马上还会被访问。</p>
+
+  <div class="think">
+    <span class="tag">思考方法</span>
+    <p>停下来看这两个解法，你会发现它们是系统设计里出场率最高的两招：<strong>空间太大 → 用树状/稀疏结构按需分配；速度太慢 → 加缓存赌局部性</strong>。后面还会反复见到它们。</p>
+  </div>
+
+  <h3>第四步：内存不够住怎么办？——把磁盘拉进来</h3>
+  <p>所有进程的地址空间加起来远大于物理内存，怎么圆这个谎？答案藏在页表项的<em>有效位</em>里：<strong>不常用的页可以被搬到磁盘上（交换空间 swap），页表项标记为"不在内存"。当进程访问到这样的页，硬件翻译失败，触发缺页中断（page fault），OS 接管：从磁盘把这页读回内存、更新页表、重新执行那条指令</strong>——进程全程无感，只觉得那次访问慢了一点。</p>
+  <p>内存满了要腾地方，踢谁出去？这就是<strong>页面置换算法</strong>：</p>
+  <ul>
+    <li><strong>最优算法（OPT）</strong>：踢"将来最久不会被用到"的页——需要预知未来，不可实现，只做基准；</li>
+    <li><strong>FIFO</strong>：踢最早进来的——简单，但可能踢掉常用页，甚至出现"内存越大缺页越多"的 Belady 异常；</li>
+    <li><strong>LRU</strong>：踢最久没用过的——用过去预测未来，效果好，但精确实现要每次访存都记时间戳，太贵；</li>
+    <li><strong>时钟算法（Clock）</strong>：LRU 的廉价近似。所有页排成一圈，利用硬件自动设置的<em>访问位</em>：指针扫过，访问位是 1 就清零放过，是 0 就淘汰。<strong>真实系统用的都是这类近似 LRU。</strong></li>
+  </ul>
+
+  <div class="crash">
+    <span class="tag">警示：抖动</span>
+    <p>如果进程实际需要的页远多于物理内存，就会陷入"刚踢出去的页马上又要用"的死循环，CPU 时间全花在换页上，系统吞吐断崖式下跌——这叫<strong>抖动（thrashing）</strong>。此时唯一的出路是降低并发度（挂起一些进程）或加内存，调度算法救不了。</p>
+  </div>
+
+  <h3>第五步：虚拟内存的红利——惰性的艺术</h3>
+  <p>这套"访问时才处理"的机制一旦建成，很多昂贵操作都可以变成"先记账、用到再说"：</p>
+  <ul>
+    <li><strong>写时复制（Copy-on-Write）</strong>：<code>fork()</code> 并不真的复制内存，父子共享所有页、全部标记只读；谁先写，谁在缺页中断里获得自己的副本。fork 因此快如闪电；</li>
+    <li><strong>按需加载（demand paging）</strong>：exec 一个大程序不必整个读入，跑到哪页加载哪页；</li>
+    <li><strong>内存映射文件（mmap）</strong>：把文件"假装"成一段内存，读写内存即读写文件，加载同样是惰性的。</li>
+  </ul>
+  <p><strong>虚拟内存的精髓可以浓缩成一句话：用"地址翻译 + 缺页中断"这一对钩子，把内存管理的所有决策推迟到最后一刻。</strong></p>
+  <hr class="ch-end">
+</section>
+
+<!-- ============ 第三章 ============ -->
+<section class="chapter" id="ch3">
+  <div class="ch-label">CH.03 / 并发</div>
+  <h2>当分身开始打架 —— 并发与锁</h2>
+  <p class="ch-question">多个执行流共享同一份数据时，为什么连 <code>counter++</code> 都会算错？又该怎么救？</p>
+
+  <h3>第一步：线程为什么会出现</h3>
+  <p>进程隔离得很好，但隔离也是墙：两个进程想协作干一件活（比如一个网页服务器同时处理一万个请求），进程间通信又慢又麻烦，而且每个进程都背着一整套地址空间，创建和切换都重。</p>
+  <p>需求其实是："<em>我要多个执行流，但它们操作的是同一份数据。</em>"于是把进程一拆为二：<strong>地址空间、打开的文件这些资源归进程；执行流本身（寄存器 + 栈）单独抽出来，叫线程（thread）</strong>。同一进程的多个线程共享全部内存，只有各自的栈和寄存器是私有的。切换线程不必换地址空间，轻快得多。</p>
+
+  <h3>第二步：共享的代价——一行代码的车祸</h3>
+  <p>共享内存带来了协作的便利，也带来了操作系统里最阴险的一类 bug。看这个实验：两个线程各把共享变量 <code>counter</code> 加一百万次，最后结果却几乎从不等于两百万。</p>
+
+  <div class="crash">
+    <span class="tag">翻车现场</span>
+    <p><code>counter++</code> 在 CPU 眼里是三条指令：<em>读 counter 到寄存器 → 寄存器加一 → 写回内存</em>。假设 counter=50，线程 A 读到 50、加成 51，还没写回——时钟中断，切到线程 B。B 也读到 50，加成 51，写回。切回 A，A 把自己的 51 也写回。<strong>两次加一，counter 只增加了 1。</strong>结果取决于中断切换的精确时机，每次跑都不一样——这叫<strong>竞态条件（race condition）</strong>，这类结果依赖时序的代码段叫<strong>临界区（critical section）</strong>。</p>
+  </div>
+
+  <p>问题的本质：<strong>三条指令的组合不是原子的，中间可以被任意打断</strong>。我们需要的性质是<strong>互斥（mutual exclusion）</strong>——同一时刻至多一个线程身处临界区。</p>
+
+  <h3>第三步：锁怎么造出来</h3>
+  <p>把互斥包装成一对操作：进临界区前 <code>lock()</code>，出来后 <code>unlock()</code>，有人持锁时别人 lock 就得等。接口好定，难在实现——这又是一条"天真方案逐步翻车"的链：</p>
+  <ul>
+    <li><strong>尝试一：关中断。</strong>进临界区前关掉中断，没人能打断我。单核确实有效，但：用户程序若能关中断，就能独霸 CPU（回到协作式时代的噩梦）；而且<em>多核下完全无效</em>——别的核根本不受你这个核的中断开关影响；</li>
+    <li><strong>尝试二：用一个 flag 变量标记"有人在里面"。</strong>检查 flag 和设置 flag 是两步，这两步之间同样能被打断——<em>用有竞态的代码去解决竞态，循环论证</em>；</li>
+    <li><strong>破局：硬件出手。</strong>软件在"检查+修改"之间怎么都会留缝，那就让硬件提供一条<strong>一步完成"读出旧值并写入新值"的原子指令</strong>——test-and-set（或 compare-and-swap）。用它写 <code>while (test_and_set(&flag) == 1) ;</code> 就是一把正确的<strong>自旋锁（spinlock）</strong>。</li>
+  </ul>
+  <p>自旋锁正确了，但等锁的线程在空转烧 CPU。改进：拿不到锁就<strong>把自己标记为阻塞、让出 CPU，由持锁者释放时唤醒</strong>——这是互斥锁（mutex）的睡眠实现。两者的取舍很典型：<em>临界区极短用自旋（省去两次上下文切换），可能等很久用睡眠</em>。Linux 内核里两者都在用。</p>
+
+  <h3>第四步：光有互斥不够——条件变量与信号量</h3>
+  <p>很快你会发现另一类需求锁解决不了：线程 A 要等某个<em>条件</em>成立才能继续（队列里有数据了、子任务完成了）。拿着锁死等？别人永远没机会把条件变成真。反复加锁解锁轮询？浪费且有延迟。</p>
+  <p>正确的原语是<strong>条件变量（condition variable）：<code>wait(cond, lock)</code> 原子地"释放锁并睡去"，被 <code>signal(cond)</code> 唤醒后重新拿锁继续</strong>。"释放锁"和"睡去"必须是原子的一步，否则会在缝隙里错过唤醒信号，睡死过去。</p>
+
+  <div class="term">
+    <span class="tag">经典模型：生产者-消费者</span>
+    <p>一个有界缓冲区，生产者往里放，消费者往外取：缓冲区满，生产者睡；空，消费者睡。所有消息队列、线程池、管道的内核都是它。两条铁律：<strong>wait 必须包在 while 循环里重新检查条件</strong>（被唤醒 ≠ 条件仍然成立，可能被别人抢先消费了）；<strong>生产者和消费者要用两个条件变量</strong>（"有空位"和"有数据"），混用一个会唤错对象导致全体沉睡。</p>
+  </div>
+
+  <p><strong>信号量（semaphore）</strong>是另一套等价的原语：一个带计数的对象，<code>P()</code> 减一、减到负就睡，<code>V()</code> 加一并唤醒一个。初值为 1 就是锁，初值为 N 就是"最多 N 人同行"的资源计数器。锁 + 条件变量能做的，信号量都能做，反之亦然——面试爱考互相实现。</p>
+
+  <h3>第五步：终极噩梦——死锁</h3>
+  <p>锁多了，新的灾难登场：线程 1 持有锁 A 等锁 B，线程 2 持有锁 B 等锁 A——<strong>两人永远互相等待，这就是死锁（deadlock）</strong>。死锁的成立需要四个条件同时满足，破坏任何一个即可预防：</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>必要条件</th><th>含义</th><th>破坏它的办法</th></tr></thead>
+    <tbody>
+      <tr><td>互斥</td><td>资源一次只能一人用</td><td>用无锁数据结构（CAS）绕开锁</td></tr>
+      <tr><td>持有并等待</td><td>拿着一个还要等下一个</td><td>一次性申请全部资源，拿不齐就全放掉</td></tr>
+      <tr><td>不可抢占</td><td>资源不能被强行夺走</td><td>trylock 失败就释放已持有的锁重来</td></tr>
+      <tr><td>循环等待</td><td>等待关系成环</td><td><strong>给所有锁定全局顺序，人人按序加锁</strong>——工程上最常用</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>除了预防，还有两条路线：<em>避免</em>（调度时算一算会不会进入危险状态，如银行家算法——理论经典，工程少用）和<em>检测恢复</em>（定期找等待环，找到就杀掉一个，数据库死锁处理就是这么干的）。</p>
+
+  <div class="think">
+    <span class="tag">思考方法</span>
+    <p>并发这一章的审题习惯：看到任何共享数据，先问三个问题——<strong>谁在同时碰它？操作是原子的吗？我等待的条件可能在检查后、行动前被别人改掉吗？</strong>绝大多数并发 bug 都栽在第三问：check 和 act 之间的缝隙（TOCTOU）。这个习惯和你写算法时"先想清不变式再动手"是同一件事。</p>
+  </div>
+  <hr class="ch-end">
+</section>
+
+<!-- ============ 第四章 ============ -->
+<section class="chapter" id="ch4">
+  <div class="ch-label">CH.04 / 持久化</div>
+  <h2>对抗断电与遗忘 —— 文件系统</h2>
+  <p class="ch-question">内存一断电就清零。怎么把数据可靠地留在磁盘上，还要在写到一半断电时不留下烂摊子？</p>
+
+  <h3>第一步：和一个慢得离谱的设备打交道</h3>
+  <p>磁盘的世界观和内存完全不同：它按<em>扇区</em>（512B/4KB）整块读写，机械盘还要等磁头寻道、盘片旋转，一次随机访问几毫秒——比内存慢十万倍。第一个问题是<em>CPU 怎么跟这种慢设备沟通</em>，答案又是一条进化链：</p>
+  <ul>
+    <li><strong>轮询（polling）</strong>：CPU 不停地问"好了没？"——把 CPU 拴在了慢设备上；</li>
+    <li><strong>中断（interrupt）</strong>：CPU 发完命令去干别的，设备完成后用中断"喊"它——CPU 解放了，但数据搬运（一个字节一个字节从设备拷到内存）还得 CPU 亲自动手；</li>
+    <li><strong>DMA</strong>：再雇一个专职搬运工（DMA 控制器），CPU 只说"把这块数据搬到那个地址"，搬完中断通知——<strong>CPU 彻底只管指挥，不碰数据</strong>。</li>
+  </ul>
+
+  <h3>第二步：从扇区到文件——inode 的设计</h3>
+  <p>裸磁盘只是一个巨大的扇区数组，人类需要的却是"文件"和"文件夹"。文件系统要回答的核心问题是：<em>拿什么数据结构，把"文件名 → 磁盘上的一堆块"这个映射管起来？</em></p>
+  <p>Unix 的答案优雅而长寿：</p>
+
+  <div class="term">
+    <span class="tag">概念诞生</span>
+    <p><strong>inode：每个文件一个"档案卡"</strong>，记录文件的元数据（大小、权限、时间戳）和<strong>它的数据块都在磁盘哪些位置</strong>。前几块用直接指针记录，大文件用上间接指针——指向"装满指针的块"，再不够用二级、三级间接指针。又是那棵"按需生长的树"（和多级页表同一招）。<strong>目录本身也是文件</strong>，内容就是一张"文件名 → inode 号"的表。文件名不属于文件，属于目录——所以硬链接（两个名字指向同一 inode）才成为可能，inode 里的链接计数归零、且无人打开时，文件才真正被删除。</p>
+  </div>
+
+  <p>于是打开 <code>/home/zx/notes.txt</code> 的全过程是一次逐级查表：读根目录 <code>/</code> 的 inode → 找到目录数据 → 查到 <code>home</code> 的 inode 号 → 读它 → 查到 <code>zx</code> → 再查到 <code>notes.txt</code> 的 inode。拿到 inode，就拿到了文件的一切。</p>
+  <p>性能上还有一层要紧的设计：磁盘随机访问太贵，所以 FFS（快速文件系统）开始，文件系统都在拼命<strong>制造局部性——把同一目录的文件、文件的 inode 和它的数据块，尽量放进磁盘上相邻的块组里</strong>；同时内存里用<strong>页缓存（page cache）</strong>兜住热数据，读写先走内存。这就是为什么 <code>write()</code> 返回了数据却可能还没落盘——<strong>真要保证落盘，必须显式调用 <code>fsync()</code></strong>，数据库的日志写入从不省这一步。</p>
+
+  <h3>第三步：最难的问题——写到一半断电了</h3>
+  <p>往文件追加一个块，文件系统实际要写三处：数据块本身、inode（新指针和新大小）、位图（标记块已占用）。<em>磁盘一次只能原子地写一个扇区</em>，三笔写之间断电，就会留下各种不一致：位图说块被占了却没人用（漏块）、inode 指向了没写入的垃圾数据（更糟）。这就是<strong>崩溃一致性问题（crash consistency）</strong>——文件系统领域几十年的主线剧情。</p>
+  <ul>
+    <li><strong>方案一：事后打扫（fsck）。</strong>崩溃重启后全盘扫描，检查所有 inode 和位图是否自洽，能修则修。<em>翻车点</em>：磁盘越来越大，扫一遍要几小时；而且它只能修"账目不平"，救不回指向垃圾数据的 inode；</li>
+    <li><strong>方案二：先记账再动手——日志（journaling）。</strong>借用数据库的预写日志思想：<strong>把这次要做的所有修改先完整写进磁盘上一块专门的日志区，写一条"记账完毕"的提交记录，然后才去改真正的位置</strong>。断电了？重启时看日志：有完整提交记录的事务，照着日志重放一遍；没写完提交记录的，整个当作没发生。<strong>无论断电落在哪一刻，结果要么是"全做了"要么是"全没做"——原子性诞生了。</strong>ext4、NTFS、XFS 都走这条路（多数默认只对元数据记日志，性能与安全的折中）；</li>
+    <li><strong>方案三：永不覆盖——写时复制。</strong>ZFS、Btrfs 更激进：任何修改都写到新位置，最后原子地切换一个根指针。老数据永远完好，还顺手得到了快照功能。</li>
+  </ul>
+
+  <div class="think">
+    <span class="tag">思考方法</span>
+    <p>"多步操作 + 中途可能崩溃"是分布式系统、数据库、文件系统共享的母题，解法也共享：<strong>要么先写日志（WAL），要么写新不改旧最后切指针（COW）</strong>。在操作系统里学会这两招，数据库的 redo log 和 MVCC 就只是老朋友换了名字。</p>
+  </div>
+  <hr class="ch-end">
+</section>
+
+<!-- ============ 终章 ============ -->
+<section class="chapter" id="ch5">
+  <div class="ch-label">CH.05 / 终章</div>
+  <h2>开机之后的一秒钟</h2>
+  <p class="ch-question">把四章的知识串成一条线：从按下电源键，到你在 shell 里敲下一条命令，发生了什么？</p>
+
+  <ol>
+    <li><strong>加电。</strong>CPU 从固定地址开始执行固件（BIOS/UEFI），固件找到磁盘上的引导程序，引导程序把<strong>内核</strong>装进内存并跳过去——此刻机器上只有一个执行流，运行在内核态；</li>
+    <li><strong>内核初始化。</strong>建立<strong>页表</strong>、打开虚拟内存，登记<strong>中断处理程序</strong>（时钟、键盘、磁盘各就各位），初始化调度器和页缓存；</li>
+    <li><strong>第一个进程。</strong>内核创建 1 号进程 <code>init</code>（如今多是 systemd）并降到用户态——从此内核退居幕后，<strong>只在中断和系统调用发生时被唤醒</strong>。init 再 fork 出登录程序、图形界面、你的 shell；</li>
+    <li><strong>你敲下 <code>python solve.py</code>。</strong>每一次按键都是一次键盘<strong>中断</strong>；shell 被唤醒读入字符。回车后，shell <strong><code>fork()</code></strong>——写时复制让这次复制几乎免费——子进程 <strong><code>exec()</code></strong> 装载 Python，<strong>按需加载</strong>意味着解释器的代码页要跑到才从磁盘读入，每次都触发一次<strong>缺页中断</strong>；</li>
+    <li><strong>程序运行。</strong>Python 读取脚本文件：<code>read()</code> 系统调用 <strong>trap 进内核</strong>，文件系统沿着目录一路查到 <strong>inode</strong>，发现页缓存没有，向磁盘发出 <strong>DMA</strong> 请求，进程<strong>阻塞</strong>——调度器立刻把 CPU 切给别的就绪进程。数据到了，磁盘中断唤醒它，回到<strong>就绪队列</strong>等待被选中；</li>
+    <li><strong>结果落盘。</strong>脚本把答案写进文件：数据先进页缓存就返回了；文件系统在后台把这次修改<strong>先写日志、再写原位</strong>——就算此刻你一脚踢掉电源，重启后磁盘依然自洽。</li>
+  </ol>
+
+  <p>数一数，这一秒钟里出场的角色：进程与 fork/exec、上下文切换与调度、用户态/内核态与系统调用、页表/TLB/缺页中断/写时复制、中断与 DMA、inode/页缓存/日志——<strong>四章的每一个概念都不是孤立的知识点，而是同一台机器上互相咬合的齿轮。</strong></p>
+
+  <div class="finale">
+    <h3>全书只有一句话</h3>
+    <p>如果把整个操作系统压缩成一条思维主线，它是：<strong>硬件只提供了极少的原语——原子指令、中断、地址翻译、trap——操作系统用这几块积木，搭出了"每个程序独占一台无限大的机器"这个宏大的假象。</strong></p>
+    <p>而贯穿始终的思考方法，值得你带去任何系统设计场景：</p>
+    <ul>
+      <li><strong>先造机制，再谈策略</strong>——"怎么切换"和"切给谁"永远分开设计；</li>
+      <li><strong>加一层间接性</strong>能解决大多数问题（虚拟地址、inode、文件描述符都是间接层）；</li>
+      <li><strong>用缓存赌局部性</strong>对抗慢（TLB、页缓存），<strong>用按需生长的树</strong>对抗大（多级页表、间接块）；</li>
+      <li><strong>把多步操作变成"全或无"</strong>对抗崩溃（日志、写时复制）；</li>
+      <li>遇到共享数据，永远先问：<strong>检查和行动之间，世界会不会变？</strong></li>
+    </ul>
+    <p>想继续深入，最贴合这种"问题驱动"叙事的教材是 <em>Operating Systems: Three Easy Pieces</em>（OSTEP，免费在线，有中文版《操作系统导论》）——本文的骨架就与它同源。配合动手：读 xv6 的源码，或在 Linux 下用 <code>strace</code> 观察任何命令背后的系统调用，齿轮会转得更清楚。</p>
+  </div>
+</section>
+
+</div>
